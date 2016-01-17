@@ -1,0 +1,16 @@
+{
+  "AppSettings": {
+    "SiteTitle": "StarWars"
+  },
+  "Data": {
+    "ConnectionString": "Host=localhost;Username=postgres;Password=qazwsxedc;Database=starwars"
+  },
+  "Logging": {
+    "IncludeScopes": false,
+    "LogLevel": {
+      "Default": "Verbose",
+      "System": "Information",
+      "Microsoft": "Information"
+    }
+  }
+}
