@@ -1,8 +1,8 @@
 # Mac で C# の Web 開発ができるようになった!
 
-　Visual Studio Code (VS Code) で C# を書いて，O/RM の Entity Framework 7 (EF7) から PostgreSQL にアクセスし，データベースのレコードを ASP.NET 5 で表示する。すべて Mac OS X 上で可能になったのです。 そうです，Mac で ASP.NET Web サービス開発がついにできるようになったのです！
+　Visual Studio Code (VS Code) で C# を書いて，O/RM の Entity Framework 7 (EF7) から PostgreSQL にアクセスし，データベースのレコードを ASP.NET 5 で表示する。すべて Mac OS X 上で可能になったのです。 そうです，Mac で ASP.NET Web アプリ開発がついにできるようになったのです！
 
-　本稿では Mac 版 VS Code 上で C# を使い， EF7 から Postgres に CRUD した結果を自動テストコード xUnit.net で検証します。最後に ASP.NET 5 を使い DB のデータを出力する Web サービスを Mac OS X 上で起動させます。（今日中に，たぶん・・・）
+　本稿では Mac 版 VS Code 上で C# を使い， EF7 から Postgres に CRUD した結果を自動テストコード xUnit.net で検証します。最後にASP.NET 5 の Web アプリを配備できる非同期 I/O の Kestrel Web サーバを使って，DB レコードの Web 出力を確認します。（今日中に，たぶん・・・）
 
 　Postgres のインストールと，VS Code のデバッグについては本稿の対象外としています。また，ほぼすべての技術が β 版のため，将来の変更で動作しなくなる可能性があります。
 
@@ -16,10 +16,10 @@
 
 　C# 標準の言語実装は <a href="https://ja.wikipedia.org/wiki/%E3%82%A2%E3%83%B3%E3%83%80%E3%83%BC%E3%82%B9%E3%83%BB%E3%83%98%E3%83%AB%E3%82%B9%E3%83%90%E3%83%BC%E3%82%B0" target="_blank">アンダース・ヘルスバーグ</a> (TypeScript のお父さん) による Microsoft <a href="https://msdn.microsoft.com/ja-jp/library/kx37x362.aspx" target="_blank">Visual C#</a> (2000年，2002年) が最も有名です。C# といえば多くの文脈で 「Windows 上の Visual Studio で開発される Visual C#」を意味していました。
 
-　C# の Web 開発 = Windows = **商用非公開** （安心のベンダーサポートは付く）エンタープライズ開発の印象が強く，オープンで活発なコミュニティを基盤に，ドキュメントやナレッジ コミュニティが充実した OSS が主流の Web 界隈とは長らく一線を画していたように思います。
+　C# の Web 開発 = Windows = **商用非公開** （安心のベンダー サポートは付く）エンタープライズ開発の印象が強く，オープンで活発なコミュニティを基盤に，ドキュメントやナレッジ コミュニティが充実した OSS が主流の Web 界隈とは長らく一線を画していたように思います。
 
 　*生き残るのに大事なこと = 圧倒的金か愛が感じられるもの*
- - <a href="" target="_blank">JavaScript の過去と現在、ガチな JS アプリケーション設計</a>
+ - <a href="http://www.slideshare.net/MasashiSakurai/javascript-js-53219222" target="_blank">JavaScript の過去と現在、ガチな JS アプリケーション設計</a>
 
 ## Mono (Linux，Mac，Windows，Android，iOS)
 
@@ -29,13 +29,13 @@
 
 　モバイルの分野では，Mono から派生した Xamarin （ザマリン）（2011年）や Unity (2005年) の登場で，C# による Android，iOS のネイティブ／ゲーム アプリも開発できるようになりました。
 
-　Xamrin は 本家 Visual Studio 2015 より標準でインストールできるようになり，Android のデザイナー，デバッガ，エミュレータまでも VS 2015 にはあります。<a href="http://www.idc.com/prodserv/smartphone-os-market-share.jsp" target="_blank">モバイル分野で後塵を拝した Microsoft</a> が本気になっているようです。
+　Xamarin は 本家 Visual Studio 2015 より標準でインストールできるようになり，Android のデザイナー，デバッガ，エミュレータまでも VS 2015 にはあります。<a href="http://www.idc.com/prodserv/smartphone-os-market-share.jsp" target="_blank">モバイル分野で後塵を拝した Microsoft</a> が本気になっているようです。
 
 <a href="http://www.slideshare.net/chack411/net-core-5-windows-linux-os-x-docker" targe="_blanl">![VS2015.png](https://qiita-image-store.s3.amazonaws.com/0/67778/c472feec-9f9a-a24f-6fe5-8fa1d3d227f6.png)</a>
 
 ## .NET Core (Linux，Mac，Windows)
 
-　近年の Web 開発は，JS を中心とした開発の生産性や性能の向上に挑戦し続けており，新しい技術が凄まじいスピードで誕生し続けています。特にフロントエンド技術の変遷は<a href="http://postd.cc/longevity-or-lack-thereof-in-javascript-frameworks" target="_blank">「JavaScriptフレームワークの寿命」</a>でも書かれたように，2012年より毎年フレームワークのトレンドが移り変わるという状態です。渦中の Web 技術おじさんとして，毎日楽しいのです。
+　近年の Web 開発は，JS を中心とした開発の生産性や性能の向上に挑戦し続けており，新しい技術が凄まじいスピードで誕生し続けています。特にフロントエンド技術の変遷は<a href="http://postd.cc/longevity-or-lack-thereof-in-javascript-frameworks" target="_blank">「JavaScriptフレームワークの寿命」</a>でも書かれたように，2012年より毎年フレームワークのトレンドが移り変わるという状態です。渦中の Web おじさんとして，毎日楽しいのです。
 
 　モダン Web 開発の例としては，バックエンドにイベント駆動型の Node.js，フロントエンドは仮想 DOM の React や双方向バインディングの AngularJS，データベースはスケールアウトを前提とした Cassandra や MongoDB，パッケージ管理に npm や Bower，ビルドシステムは gulp や Grunt，VSC (Version Control System) に Git を使い，CSS は PostCSS や Sass で書き stylelint で lint，CircleCI や Travis CI で継続的にビルドもする。
 
@@ -115,7 +115,7 @@ brew install icu4c
 ```
 　ICU4C (International Components for Unicode for C/C++ クラス・ライブラリー)。Java 版の ICU4J はテキスト ファイルの文字コード判定に使ったことがあります。テキストのサンプル数が少ないときにいかに文字コードを誤検知しないようにするか以下略。
 
-### DNVM インストール
+### DNVM (.NET Version Manager) インストール
 
 ```bash
 curl -sSL https://raw.githubusercontent.com/aspnet/Home/dev/dnvminstall.sh | DNX_BRANCH=dev sh && source ~/.dnx/dnvm/dnvm.sh
@@ -149,12 +149,12 @@ dnvm upgrade -r mono
 ```bash
 StarWars
 ├── Domain
-│   └── StarWarsContext.cs
+│   └── StarWarsContext.cs
 ├── Migrations
 ├── Model
-│   └── Director.cs
+│   └── Director.cs
 ├── Test
-│   └── StarWarsCrudTest.cs
+│   └── StarWarsCrudTest.cs
 └── project.json
 ```          
 
@@ -171,7 +171,7 @@ StarWars
 
 　<a href="https://msdn.microsoft.com/ja-jp/library/dn878908%28v=vs.110%29.aspx" targe="_blank">*.NET Core は，小規模のアセンブリ パッケージで NuGet を介してリリースされるためモジュール形式となっています。</a>*
 
-　Hello World 2.0 で必要なパッケージは NuGet で入手します。json を書いてコマンドを実行すると，プロジェクトに必要なパッケージの依存関係を自動で解決してくれます。バージョンアップも 1 コマンドです。VS Code であれば package.json を変更して保存すると自動でパッケージの取得ダイアログを表示してくれるので便利です。
+　Hello World 2.0 で必要なパッケージは NuGet で入手します。json を書いてコマンドを実行すると，プロジェクトに必要なパッケージの依存関係を自動で解決してくれます。バージョンアップも 1 コマンドです。VS Code であれば ~~package.json~~ project.json を変更して保存すると自動でパッケージの取得ダイアログを表示してくれるので便利です。
 
 
 | パッケージ    | 役割              | 説明             |
@@ -405,9 +405,24 @@ xUnit.net DNX Runner (32-bit DNX 4.5.1)
 * EF7 で Postgres がマイグレーションできた
 * EF7 で Postgres に C ~~RUD~~ できた
 * xUnit.net で 自動テストコードが書けた
-* ~~ASP.NET 5 で Star Wars ができた~~
+* ~~Kestrel Web サーバ上に ASP.NET 5 を配備して Star Wars ができた~~
 
 　当初の目的を未達で時間を迎えてしまいました。無念です。
+
+
+# 付録
+
+　今回のソースコードを GitHub に掲載しました。ご利用ください。
+
+　GitHub, "osxcsharp", https://github.com/k--kato/osxcsharp
+
+## ASP.NET 5 is dead (2016/1/19)
+
+　[大規模な名前変更](http://www.hanselman.com/blog/ASPNET5IsDeadIntroducingASPNETCore10AndNETCore10.aspx)がありましたので，補足します。
+
+> * ASP.NET 5 is now ASP.NET Core 1.0. 
+> * .NET Core 5 is now .NET Core 1.0.
+> * Entity Framework 7 is now Entity Framework Core 1.0 or EF Core 1.0 colloquially. 
 
 
 # 参考ノート
@@ -421,3 +436,4 @@ xUnit.net DNX Runner (32-bit DNX 4.5.1)
  1. Visual Studio Code, "User and Workspace Settings", https://code.visualstudio.com/docs/customization/userandworkspace
  1. Visual Studio Code, "Debugging", https://code.visualstudio.com/docs/editor/debugging
  1. Visual Studio Code, "Editing Evolved", https://code.visualstudio.com/docs/editor/editingevolved
+ 1. Scott Hanselman, "ASP.NET 5 is dead - Introducing ASP.NET Core 1.0 and .NET Core 1.0", http://www.hanselman.com/blog/ASPNET5IsDeadIntroducingASPNETCore10AndNETCore10.aspx
