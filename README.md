@@ -302,8 +302,8 @@ namespace StarWars.Model
 　最初とは別名でマイグレーションを実行します。
 
 ```bash
-dnx ef migrations add StarWarsEp7.2
-dnx ef database update
+dotnet ef migrations add StarWarsEp7.2
+dotnet ef database update
 ```
 
 ![EFCMigrationsUpdate2.png](https://qiita-image-store.s3.amazonaws.com/0/67778/b0b7fe02-715d-fc58-3c7d-e8614ea1ea20.png)
