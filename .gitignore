@@ -1,5 +1,7 @@
 Migrations
 project.lock.json
+bin
+obj
 
 ### OSX template
 .DS_Store
