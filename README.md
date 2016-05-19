@@ -6,6 +6,8 @@
 
 　Postgres のインストールと，VS Code のデバッグ，ASP.NET Core の Web アプリを配備できる非同期 I/O の Kestrel Web サーバについては本稿の対象外としています。僕が執筆中の薄い本をお待ち下さい。また，ほぼすべての技術が β 版（1.0.0-RC2 2016/5/20時点）のため，将来の変更で動作しなくなる可能性があります。
 
+![NETCore.png](https://cloud.githubusercontent.com/assets/10364603/15401835/44f5992c-1e2c-11e6-83af-93c1506babeb.jpg)
+
 # Mac C# の歴史
 
 　Javascript (JS) を ~~JS おじさんが~~ ECMAScript (エクマ スクリプト) と呼ぶことがありますが，これは国際的な標準化団体である「Ecma インターナショナル」(1961年) の <a href="http://www.ecma-international.org/publications/standards/Ecma-262.htm" target="_blank">ECMA-262</a> (1997年) として JS が標準化されているためです。
@@ -43,7 +45,7 @@
 
 　このようなモダン Web 開発フローのひとつの選択肢として，バックエンドに C# も気軽に選択できるようにしたのが .NET Core をベースとする ASP.NET Core が登場したひとつの背景だと思います。.NET Core はすべてオープン ソースで，クロス プラットフォームであり，1 つのコードで Linux のサーバでも，Mac でも，Windows でも動作します。素晴らしいです。
 
-<a href="http://blogs.msdn.com/b/bethmassi/archive/2015/02/25/understanding-net-2015.aspx" target="_blank">![NETCore.png](https://qiita-image-store.s3.amazonaws.com/0/67778/74360f5b-79d4-5c9c-0141-d85ffc5ba468.png)</a>
+![NETCore.png](https://cloud.githubusercontent.com/assets/10364603/15401733/d0bf0bc4-1e2b-11e6-9ca4-e20bbf53bbde.jpg)
 
 # VS Code (Linux, Mac, Windows)
 
@@ -405,6 +407,16 @@ SUMMARY: Total: 1 targets, Passed: 1, Failed: 0.
 
 　[RC1 から RC2 のバージョンアップに伴い大規模な仕様変更](https://blogs.msdn.microsoft.com/dotnet/2016/05/16/announcing-net-core-rc2/)がありましたので，補足します。
 
+RC1 | RC2
+----|-----
+dnu restore | dotnet restore
+dnx build   | dotnet build
+dnx run     | dotnet run
+dnx test    | dotnet test
+dnx ef      | dotnet ef
+EntityFramework7.Npgsql        | Npgsql.EntityFrameworkCore.PostgreSQL
+EntityFramework7.Npgsql.Design | Npgsql.EntityFrameworkCore.PostgreSQL.Design
+xunit.runner.dnx | dotnet-test-xunit
 
 
 # 参考ノート
