@@ -1,10 +1,10 @@
 # Mac で C# の Web 開発ができるようになった!
 
-　Visual Studio Code (VS Code) で C# を書いて，O/RM の Entity Framework Core (EFC) から PostgreSQL にアクセスし，データベースのレコードを ASP.NET Core で表示する。すべて Mac OS X 上で可能になったのです。 そうです，Mac で ASP.NET Web アプリ開発がついにできるようになったのです！
+　Visual Studio Code (VS Code) で C# を書いて，O/RM の Entity Framework Core (EFC) から PostgreSQL にアクセスし，データベースのレコードを ASP.NET Core で表示する。すべて macOS 上で可能になったのです。 そうです，Mac で ASP.NET Web アプリ開発がついにできるようになったのです！
 
 　本稿では Mac 版 VS Code 上で C# を書き，EFC から Postgres に CRUD した結果を自動テストコード xUnit.net で検証します。
 
-　Postgres のインストールと，VS Code のデバッグ，ASP.NET Core の Web アプリを配備できる非同期 I/O の Kestrel Web サーバについては本稿の対象外としています。僕が執筆中の薄い本をお待ち下さい。また，ほぼすべての技術が β 版（1.0.0-RC2 2016/5/20時点）のため，将来の変更で動作しなくなる可能性があります。
+　Postgres のインストールと，VS Code のデバッグ，ASP.NET Core の Web アプリを配備できる非同期 I/O の Kestrel Web サーバについては本稿の対象外としています。僕が執筆中の薄い本をお待ち下さい。また，ほぼすべての技術が β 版（1.0.0-RC3 2016/7/2時点）のため，将来の変更で動作しなくなる可能性があります。
 
 ![NETCore.png](https://cloud.githubusercontent.com/assets/10364603/15401835/44f5992c-1e2c-11e6-83af-93c1506babeb.jpg)
 
@@ -94,11 +94,11 @@
 
 ## VS Code インストール
 
-　<a href="https://www.visualstudio.com/ja-jp/products/code-vs.aspx" target="_blank">Visual Studio Code</a> より，Mac OS X 版をダウンロードしてください。 
+　<a href="https://www.visualstudio.com/ja-jp/products/code-vs.aspx" target="_blank">Visual Studio Code</a> より，macOS 版をダウンロードしてください。 
 
 # 環境構築
 
-　Java の開発に JDK，Javascript の開発に node や npm が必要なように，Mac OS X の C# 開発には **.NET Core ツール（dotnet）** が必要となります。
+　Java の開発に JDK，Javascript の開発に node や npm が必要なように，macOS の C# 開発には **.NET Core ツール（dotnet）** が必要となります。
 
 ## .NET Core ツール / dotnet
 
@@ -114,9 +114,9 @@ brew install openssl
 brew link --force openssl
 ```
 
-### .NET Core Installer Mac OS X
+### .NET Core Installer macOS
 
-　最後に<a href="https://www.microsoft.com/net/download" target="_blank">.NET Core Installer Mac OS X</a> をダウンロードして，パッケージをインストールします。
+　最後に<a href="https://dot.net/" target="_blank">.NET Core 1.0</a> macOS 版をダウンロードして，パッケージをインストールします。
 
 　以上で，環境構築が完了です。
 
@@ -160,7 +160,7 @@ StarWars
 |:-------------------|:------------------|:----------------|
 | <a href="https://ef.readthedocs.org/en/latest/index.html" target="_blank">Entity Framework Core</a> | O/RM | CRUD やトランザクションの制御だけではなくテーブルの自動作成やマイグレーションも可能です | 
 | <a href="http://www.npgsql.org/" target="_blank">Npgsql</a> | EFC Postgres データ プロバイダー | EFC で Postgres への接続を可能にします |
-| <a href="http://xunit.github.io/docs/getting-started-dnx.html" target="_blank">xUnit.net</a> | 自動テストコード | OS X の ASP.NET Core でも実行可能なユニット テスト フレームワークです |
+| <a href="http://xunit.github.io/docs/getting-started-dnx.html" target="_blank">xUnit.net</a> | 自動テストコード | macOS の ASP.NET Core でも実行可能なユニット テスト フレームワークです |
 
 ### project.json
 
@@ -176,30 +176,28 @@ StarWars
   "dependencies": {
     "Microsoft.NETCore.App": {
       "type": "platform",
-      "version": "1.0.0-rc2-*"
+      "version": "1.0.0-*"
     },
-    "Npgsql" : "3.1.0-*",
-    "Npgsql.EntityFrameworkCore.PostgreSQL": "1.0.0-rc2-*",
-    "Npgsql.EntityFrameworkCore.PostgreSQL.Design": "1.0.0-rc2-*",
+    "Npgsql" : "3.1.5",
+    "Npgsql.EntityFrameworkCore.PostgreSQL": "1.0.0",
+    "Npgsql.EntityFrameworkCore.PostgreSQL.Design": "1.0.0",
     "Microsoft.EntityFrameworkCore.Tools": "1.0.0-*",
-    "Microsoft.Extensions.PlatformAbstractions": "1.0.0-rc2-*",
+    "Microsoft.Extensions.PlatformAbstractions": "1.0.0",
     "xunit": "2.2.0-*",
-    "dotnet-test-xunit": "1.0.0-rc2-*"
+    "dotnet-test-xunit": "2.2.0-*"
   },
   "frameworks": {
     "netcoreapp1.0": {
       "imports": [
-        "dnxcore50",
-        "portable-net45+win8"
+        "portable-net45+win8+dnxcore50"
       ]
     }
   },
   "tools": {
     "Microsoft.EntityFrameworkCore.Tools": {
-      "version": "1.0.0-preview1-final",
+      "version": "1.0.0-*",
       "imports": [
-        "portable-net45+win8+dnxcore50",
-        "portable-net45+win8"
+        "portable-net45+win8+dnxcore50"
       ]
     }
   }
@@ -360,16 +358,15 @@ dotnet test
 　実行結果
 
 ```bash
-k-kato:osxcsharp k_kato$ dotnet test
-Project osxcsharp (.NETCoreApp,Version=v1.0) was previously compiled. Skipping compilation.
-xUnit.net .NET CLI test runner (64-bit osx.10.11-x64)
-  Discovering: osxcsharp
-  Discovered:  osxcsharp
-  Starting:    osxcsharp
-Password: r2d2
-  Finished:    osxcsharp
+k-kato:StarWars k_kato$ dotnet test
+Project StarWars (.NETCoreApp,Version=v1.0) was previously compiled. Skipping compilation.
+xUnit.net .NET CLI test runner (64-bit .NET Core osx.10.11-x64)
+  Discovering: StarWars
+  Discovered:  StarWars
+  Starting:    StarWars
+  Finished:    StarWars
 === TEST EXECUTION SUMMARY ===
-   osxcsharp  Total: 1, Errors: 0, Failed: 0, Skipped: 0, Time: 1.188s
+   StarWars  Total: 1, Errors: 0, Failed: 0, Skipped: 0, Time: 0.900s
 SUMMARY: Total: 1 targets, Passed: 1, Failed: 0.
 ```
 
@@ -379,7 +376,7 @@ SUMMARY: Total: 1 targets, Passed: 1, Failed: 0.
 
 # まとめ
  
-* Mac OS X 版 VS Code でも 本家 Windows VS に匹敵する C# 開発ができた
+* macOS 版 VS Code でも 本家 Windows VS に匹敵する C# 開発ができた
 * NuGet を使用したパッケージ管理ができた
 * EFC のコード ファーストが実践できた
 * EFC で Postgres がマイグレーションできた
@@ -419,6 +416,11 @@ EntityFramework7.Npgsql.Design | Npgsql.EntityFrameworkCore.PostgreSQL.Design
 xunit.runner.dnx | dotnet-test-xunit
 
 
+## Announcing ASP.NET Core 1.0 (2016/6/27)
+
+　ASP.NET Core 1.0 RTM (release to manufacturing: リリース版) となりました！（そして私が MVP の審査で落選の通知を受け取りました）
+
+
 # 参考ノート
 
  1. Entity Framework Documentation, "Getting Started on OS X", https://docs.efproject.net/en/latest/platforms/coreclr/getting-started-osx.html
@@ -433,3 +435,4 @@ xunit.runner.dnx | dotnet-test-xunit
  1. Scott Hanselman, "ASP.NET 5 is dead - Introducing ASP.NET Core 1.0 and .NET Core 1.0", http://www.hanselman.com/blog/ASPNET5IsDeadIntroducingASPNETCore10AndNETCore10.aspx
  1. .NET Core, "Migrating from DNX to .NET Core CLI
 Overview", http://dotnet.github.io/docs/core-concepts/dnx-migration.html
+ 1. .NET Web Development and Tools Blog, "Announcing ASP.NET Core 1.0", https://blogs.msdn.microsoft.com/webdev/2016/06/27/announcing-asp-net-core-1-0/
