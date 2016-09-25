@@ -170,7 +170,8 @@ StarWars
 {
   "version": "1.0.0-*",
   "buildOptions": {
-    "emitEntryPoint": false
+    "emitEntryPoint": false,
+    "debugType": "portable"
   },
   "testRunner": "xunit",
   "dependencies": {
@@ -178,9 +179,9 @@ StarWars
       "type": "platform",
       "version": "1.0.0-*"
     },
-    "Npgsql" : "3.1.5",
-    "Npgsql.EntityFrameworkCore.PostgreSQL": "1.0.0",
-    "Npgsql.EntityFrameworkCore.PostgreSQL.Design": "1.0.0",
+    "Npgsql" : "3.1.8",
+    "Npgsql.EntityFrameworkCore.PostgreSQL": "1.0.2",
+    "Npgsql.EntityFrameworkCore.PostgreSQL.Design": "1.0.2",
     "Microsoft.EntityFrameworkCore.Tools": "1.0.0-*",
     "Microsoft.Extensions.PlatformAbstractions": "1.0.0",
     "xunit": "2.2.0-*",
