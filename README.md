@@ -4,7 +4,7 @@
 
 　本稿では Mac 版 VS Code 上で C# を書き，EFC から Postgres に CRUD した結果を自動テストコード xUnit.net で検証します。
 
-　Postgres のインストールと，VS Code のデバッグ，ASP.NET Core の Web アプリを配備できる非同期 I/O の Kestrel Web サーバについては本稿の対象外としています。僕が執筆中の薄い本をお待ち下さい。また，ほぼすべての技術が β 版（1.0.0-RC3 2016/7/2時点）のため，将来の変更で動作しなくなる可能性があります。
+　Postgres のインストールと，VS Code のデバッグ，ASP.NET Core の Web アプリを配備できる非同期 I/O の Kestrel Web サーバについては本稿の対象外としています。僕が執筆中の薄い本をお待ち下さい。~~また，ほぼすべての技術が β 版（1.0.0-RC2 2016/5/20時点） 将来の変更で動作しなくなる可能性があります。~~ 2016/6/27 に ASP.NET Core 1.0 RTM （リリース版）となりました。メジャー バージョンの変更がない限り，今後は大幅な仕様変更がないと思われます・・・。（開発者は仕様変更がないホットなフレームワークが存在しないことを知っています）
 
 ![NETCore.png](https://cloud.githubusercontent.com/assets/10364603/15401835/44f5992c-1e2c-11e6-83af-93c1506babeb.jpg)
 
@@ -25,9 +25,9 @@
 
 ## Mono (Linux，Mac，Windows，Android，iOS)
 
-　C# 標準の言語実装は Microsoft の Visual C# だけではありません。Linux，Windows，そして Mac OS で動作する <a href="https://ja.wikipedia.org/wiki/%E3%83%9F%E3%82%B2%E3%83%AB%E3%83%BB%E3%83%87%E3%83%BB%E3%82%A4%E3%82%AB%E3%82%B6" targe="_blank">ミゲル・デ・イカザ</a> による <a href="http://www.mono-project.com/", target="_blank">Mono</a> (2001年) (スペイン語で猿) があります。
+　C# 標準の言語実装は Microsoft の Visual C# だけではありません。Linux，Windows，そして macOS で動作する <a href="https://ja.wikipedia.org/wiki/%E3%83%9F%E3%82%B2%E3%83%AB%E3%83%BB%E3%83%87%E3%83%BB%E3%82%A4%E3%82%AB%E3%82%B6" targe="_blank">ミゲル・デ・イカザ</a> による <a href="http://www.mono-project.com/", target="_blank">Mono</a> (2001年) (スペイン語で猿) があります。
 
-　Mono には Visual Studio 級の統合開発環境 (IDE) <a href="http://www.monodevelop.com/" target="_blank">MonoDevelop</a> も存在し，クロス プラットフォームでリッチな C# の開発が可能となっています。個人的には XAML 開発は Mono よりも VS の操作性の方が好みです。
+　Mono には Visual Studio ~~級~~ライクの統合開発環境 (IDE) <a href="http://www.monodevelop.com/" target="_blank">MonoDevelop</a> も存在し，クロス プラットフォームでリッチな C# の開発が可能となっています。個人的には XAML 開発は Mono よりも VS の操作性の方が好みです。
 
 　モバイルの分野では，Mono から派生した Xamarin （ザマリン）（2011年）や Unity (2005年) の登場で，C# による Android，iOS のネイティブ／ゲーム アプリも開発できるようになりました。
 
@@ -39,7 +39,7 @@
 
 　近年の Web 開発は，JS を中心とした開発の生産性や性能の向上に挑戦し続けており，新しい技術が凄まじいスピードで誕生し続けています。特にフロントエンド技術の変遷は<a href="http://postd.cc/longevity-or-lack-thereof-in-javascript-frameworks" target="_blank">「JavaScriptフレームワークの寿命」</a>でも書かれたように，2012年より毎年フレームワークのトレンドが移り変わるという状態です。渦中の Web おじさんとしては，毎日が新しい挑戦でこれが想像以上に楽しいです。
 
-　モダン Web 開発の例としては，バックエンドにイベント駆動型の Node.js，フロントエンドは仮想 DOM の React や双方向バインディングの AngularJS，データベースはスケールアウトを前提とした Cassandra や MongoDB，パッケージ管理に npm や Bower，ビルドシステムは gulp や Grunt，VSC (Version Control System) に Git を使い，CSS は PostCSS や Sass で書き stylelint で lint，CircleCI や Travis CI で継続的にビルドもする。
+　モダン Web 開発の例としては，バックエンドにイベント駆動型の Node.js，フロントエンドは仮想 DOM の React や双方向バインディングの AngularJS，データベースはスケールアウトを前提とした Cassandra や MongoDB，パッケージ管理に npm, yarn, Browserify や Bower，ビルドシステムは gulp や Grunt，VSC (Version Control System) に Git を使い，CSS は PostCSS や Sass で書き stylelint で lint，CircleCI や Travis CI で継続的にビルドもする。
 
 　対話形式でプロジェクトや画面のひな形を生成するスキャフォールディング（足場を組む）の Yeoman （ヨーマン）で MongoDB，Express，Angular，Node のスケルトン コードを生成させる，つまり Web 開発を JS でフルスタックに開発する <a href="http://meanjs.org/" target="_blank">"MEAN スタック"</a> が SPA (Single Page Application) の登場とともに有名になりました。
 
@@ -55,7 +55,9 @@
 
 　逆に，従来の Windows Visual Studio が提供するリッチな GUI サポートで Web 開発に慣れた開発者にとっては，VS Code は 近年の移り変わりの激しい Web 開発技術の学習コストが高い割に，生産性が低く難解なもののように感じるのではないかと思われます。
 
-　VS Code で実際に C# 開発を検証した結果をまとめました。
+　Windows 版 Visual Studio の生産性を macOS で追求するには，2016 年 11 月 17 日 にプレビュー版がリリースされた [Visual Studio for Mac](https://www.visualstudio.com/vs/visual-studio-mac/) をぜひ使用してみてください。（これから本稿で紹介するプロジェクト構成の知識をすべて VS for Mac が吸収しますので，開発者はプロダクトに集中することができます。）
+
+　脱線しましたが，VS Code で実際に C# 開発を検証した結果をまとめました。
 
 ## VS Code で出来たこと (一部)
 
@@ -89,6 +91,7 @@
 * プロジェクト テンプレートの生成
 * GUI のデザイナー (XAML，モデル等)
 * プロファイラー
+* ~~末尾の改行コード`\n`を正規表現でマッチさせる~~ (可能になりました)
 * 文字コードを自動判定してテキストを開く
 
 ## VS Code インストール
@@ -110,12 +113,14 @@
 ```bash
 brew update
 brew install openssl
-brew link --force openssl
+mkdir -p /usr/local/lib
+ln -s /usr/local/opt/openssl/lib/libcrypto.1.0.0.dylib /usr/local/lib/
+ln -s /usr/local/opt/openssl/lib/libssl.1.0.0.dylib /usr/local/lib/
 ```
 
 ### .NET Core Installer macOS
 
-　最後に<a href="https://dot.net/" target="_blank">.NET Core 1.0</a> macOS 版をダウンロードして，パッケージをインストールします。
+　最後に<a href="https://dot.net/" target="_blank">.NET Core</a> macOS 版をダウンロードして，パッケージをインストールします。
 
 　以上で，環境構築が完了です。
 
@@ -129,22 +134,24 @@ brew link --force openssl
 
 ```bash
 StarWars
-├── Domain
-│   └── StarWarsContext.cs
-├── Migrations
-├── Model
-│   └── Director.cs
-├── Test
-│   └── StarWarsCrudTest.cs
-└── project.json
-```          
+├── project.json
+├── src
+│   ├── Domain
+│   │   └── StarWarsContext.cs
+│   ├── Model
+│   │   └── Director.cs
+│   └── Program.cs
+└── test
+    └── StarWarsTest.cs
+```
 
-| ファイル／フォルダ    | 役割              | 説明             |
-|:-------------------|:------------------|:----------------|
-| StarWars           |プロジェクト フォルダ | 実行時のエントリポイント名となります |
-| project.json       | NuGet 用パッケージ管理ファイル | npm の package.js に相当します。**VS Code は本ファイルを検知して OmniSharp (コード補完機能) を有効化します**         |
-| StarWarsContext.cs | EFC Npgsql 用 DB 接続情報 | Postgres の DB 接続情報を記述します。DbContext と呼びます |
-| Director.cs        | EFC 用のテーブル／モデル | Postgres のテーブルに対応するモデルです |
+| ファイル／フォルダ     | 役割              | 説明             |
+|:--------------------|:------------------|:----------------|
+| StarWars            | プロジェクトのルート フォルダ | 実行時のエントリー ポイント名となります |
+| project.json        | パッケージ管理ファイル (NuGet 用) | npm の package.js に相当します。**VS Code は本ファイルを検知して OmniSharp (コード補完機能等) を有効化します**。 |
+| StarWarsContext.cs  | EFC Npgsql 用 DB 接続情報 | Postgres の DB 接続情報を記述します。DbContext と呼びます |
+| Director.cs         | EFC 用のテーブル／モデル | Postgres のテーブルに対応するモデルです |
+| Program.cs          | プログラムのエントリー ポイント  | ※EFC コマンドを使用するために不要でも書かなければならない Main メソッドです |
 | StarWarsCrudTest.cs | xUnit.net 用の自動テストコード | テストファイルです |
 
 
@@ -159,7 +166,7 @@ StarWars
 |:-------------------|:------------------|:----------------|
 | <a href="https://ef.readthedocs.org/en/latest/index.html" target="_blank">Entity Framework Core</a> | O/RM | CRUD やトランザクションの制御だけではなくテーブルの自動作成やマイグレーションも可能です | 
 | <a href="http://www.npgsql.org/" target="_blank">Npgsql</a> | EFC Postgres データ プロバイダー | EFC で Postgres への接続を可能にします |
-| <a href="http://xunit.github.io/docs/getting-started-dnx.html" target="_blank">xUnit.net</a> | 自動テストコード | macOS の ASP.NET Core でも実行可能なユニット テスト フレームワークです |
+| <a href="https://xunit.github.io/docs/getting-started-dotnet-core.html" target="_blank">xUnit.net</a> | 自動テストコード | macOS の ASP.NET Core でも実行可能なユニット テスト フレームワークです |
 
 ### project.json
 
@@ -169,38 +176,33 @@ StarWars
 {
   "version": "1.0.0-*",
   "buildOptions": {
-    "emitEntryPoint": false,
-    "debugType": "portable"
+    "debugType": "portable",
+    "emitEntryPoint": true
   },
-  "testRunner": "xunit",
   "dependencies": {
-    "Microsoft.NETCore.App": {
-      "type": "platform",
-      "version": "1.0.0-*"
+    "Npgsql.EntityFrameworkCore.PostgreSQL": "1.1.0",
+    "Microsoft.EntityFrameworkCore.Design": {
+      "version": "1.1.0",
+      "type": "build"
     },
-    "Npgsql" : "3.1.8",
-    "Npgsql.EntityFrameworkCore.PostgreSQL": "1.0.2",
-    "Npgsql.EntityFrameworkCore.PostgreSQL.Design": "1.0.2",
-    "Microsoft.EntityFrameworkCore.Tools": "1.0.0-*",
-    "Microsoft.Extensions.PlatformAbstractions": "1.0.0",
-    "xunit": "2.2.0-*",
-    "dotnet-test-xunit": "2.2.0-*"
+    "xunit": "2.2.0-beta4-build3444",
+    "dotnet-test-xunit": "2.2.0-preview2-build1029",
+    "Microsoft.Extensions.PlatformAbstractions": "1.1.0"
   },
   "frameworks": {
-    "netcoreapp1.0": {
-      "imports": [
-        "portable-net45+win8+dnxcore50"
-      ]
+    "netcoreapp1.1": {
+      "dependencies": {
+        "Microsoft.NETCore.App": {
+          "type": "platform",
+          "version": "1.1.0"
+        }
+      }
     }
   },
   "tools": {
-    "Microsoft.EntityFrameworkCore.Tools": {
-      "version": "1.0.0-*",
-      "imports": [
-        "portable-net45+win8+dnxcore50"
-      ]
-    }
-  }
+    "Microsoft.EntityFrameworkCore.Tools.DotNet": "1.1.0-preview4-final"
+  },
+  "testRunner": "xunit"
 }
 ```
 
@@ -209,6 +211,38 @@ StarWars
 ```bash
 dotnet restore
 ```
+
+## .NET Core コンソール アプリケーション
+
+　.NET Core のパッケージを管理する project.json では，コンパイラにプロジェクトが「コンソール アプリケーション」なのか「クラス ライブラリ」なのかを指定します。EFC コマンドを使用するにはコンソール アプリでなければ使用できない制限事項が（なぜか）あります。そのため，以下の設定を記述しています。
+
+```json:project.json
+  "buildOptions": {
+    "emitEntryPoint": true
+```
+
+　コンソール アプリを指定した場合はプログラムのエントリー ポイント Main メソッドを作成する必要が生じます。
+
+```csharp:Program.cs
+using System;
+namespace StarWars
+{
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            Console.WriteLine("Hello World!");
+        }
+    }
+}
+```
+
+　コンソール アプリを起動するには以下のコマンドを実行します。
+
+```bash
+dotnet run
+```
+
 
 ## Entity Framework Core
 
@@ -358,15 +392,16 @@ dotnet test
 　実行結果
 
 ```bash
-k-kato:StarWars k_kato$ dotnet test
-Project StarWars (.NETCoreApp,Version=v1.0) was previously compiled. Skipping compilation.
-xUnit.net .NET CLI test runner (64-bit .NET Core osx.10.11-x64)
+bash$ dotnet test
+Project StarWars (.NETCoreApp,Version=v1.1) was previously compiled. Skipping compila
+tion.
+xUnit.net .NET CLI test runner (64-bit .NET Core osx.10.12-x64)
   Discovering: StarWars
   Discovered:  StarWars
   Starting:    StarWars
   Finished:    StarWars
 === TEST EXECUTION SUMMARY ===
-   StarWars  Total: 1, Errors: 0, Failed: 0, Skipped: 0, Time: 0.900s
+   StarWars  Total: 1, Errors: 0, Failed: 0, Skipped: 0, Time: 1.070s
 SUMMARY: Total: 1 targets, Passed: 1, Failed: 0.
 ```
 
@@ -389,7 +424,7 @@ SUMMARY: Total: 1 targets, Passed: 1, Failed: 0.
 
 　今回のソースコードを GitHub に掲載しました。ご利用ください。
 
-　GitHub, "osxcsharp", https://github.com/k--kato/osxcsharp
+　GitHub, "osxcsharp", https://github.com/k--kato/osxcsharp/
 
 ## ASP.NET 5 is dead (2016/1/19)
 
@@ -415,11 +450,28 @@ EntityFramework7.Npgsql        | Npgsql.EntityFrameworkCore.PostgreSQL
 EntityFramework7.Npgsql.Design | Npgsql.EntityFrameworkCore.PostgreSQL.Design
 xunit.runner.dnx | dotnet-test-xunit
 
-
 ## Announcing ASP.NET Core 1.0 (2016/6/27)
 
 　ASP.NET Core 1.0 RTM (release to manufacturing: リリース版) となりました！（そして私が MVP の審査で落選の通知を受け取りました）
 
+## Npgsql 3.1.8 and Npgsql EFCore 1.0.2 are out (2016/9/23)
+
+　Entity Framework Core 1.0.2 がリリースされ，Npgsql が 3.1.8 となりました。
+
+## Announcing .NET Core 1.1, Announcing Entity Framework Core 1.1 (2016/11/16)
+
+　.NET Core 1.1.0 と Entity Framework Core 1.1.0 がリリースされました。
+
+　1.1.0 以前の環境が構築されていて，dotnet restore で porject.json のエラーが発生する場合は，以下の[手順](http://iamnotmyself.com/2016/06/27/installing-net-core-1-0-on-a-dirty-osx/)を参考にしてください。
+
+```bash
+sudo nuget update -self
+nuget locals all -clear
+sudo rm -rf /usr/local/share/dotnet/
+# 最新の .NET Core 1.1 SDK をインストールする
+```
+
+　dotnet ef コマンドが使用できない場合は，project.json ファイルの `emitEntryPoint` を `true` に設定して，project がコンソール アプリであることを明記することで解決します。 
 
 # 参考ノート
 
@@ -436,3 +488,9 @@ xunit.runner.dnx | dotnet-test-xunit
  1. .NET Core, "Migrating from DNX to .NET Core CLI
 Overview", http://dotnet.github.io/docs/core-concepts/dnx-migration.html
  1. .NET Web Development and Tools Blog, "Announcing ASP.NET Core 1.0", https://blogs.msdn.microsoft.com/webdev/2016/06/27/announcing-asp-net-core-1-0/
+ 1. Npgsql, "Npgsql 3.1.8 and Npgsql EFCore 1.0.2 are out", http://www.npgsql.org/news/npgsql-3.1.8-efcore-1.0.2.html
+ 1. I Am NotMyself, "Installing .NET Core 1.0 on a Dirty OSX", http://iamnotmyself.com/2016/06/27/installing-net-core-1-0-on-a-dirty-osx/
+ 1. Ngpsql, "Getting Started", http://www.npgsql.org/efcore/index.html
+ 1. Microsoft, "Entity Framework Core", https://docs.microsoft.com/en-us/ef/core/index
+ 1. .Net Blog, "Announcing .NET Core 1.1", https://blogs.msdn.microsoft.com/dotnet/2016/11/16/announcing-net-core-1-1/
+ 1. .NET Blog, "Announcing Entity Framework Core 1.1", https://blogs.msdn.microsoft.com/dotnet/2016/11/16/announcing-entity-framework-core-1-1/

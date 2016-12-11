@@ -11,7 +11,7 @@ namespace StarWars.Domain
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             var path = PlatformServices.Default.Application.ApplicationBasePath;
-            optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Username=c3po;Password=r2d2;Database=starwars");
+            optionsBuilder.UseNpgsql("Host=localhost;Port=5433;Username=c3po;Password=r2d2;Database=starwars");
         }
     }
 }
