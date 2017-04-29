@@ -88,15 +88,12 @@
 
 ## VS Code で出来なかったこと (一部)
 
-* プロジェクト テンプレートの生成
 * GUI のデザイナー (XAML，モデル等)
 * プロファイラー
-* ~~末尾の改行コード`\n`を正規表現でマッチさせる~~ (可能になりました)
-* 文字コードを自動判定してテキストを開く
 
 ## VS Code インストール
 
-　<a href="https://www.visualstudio.com/ja-jp/products/code-vs.aspx" target="_blank">Visual Studio Code</a> より，macOS 版をダウンロードしてください。 
+　<a href="https://code.visualstudio.com/" target="_blank">Visual Studio Code</a> より，macOS 版をダウンロードしてください。 
 
 # 環境構築
 
@@ -120,7 +117,7 @@ ln -s /usr/local/opt/openssl/lib/libssl.1.0.0.dylib /usr/local/lib/
 
 ### .NET Core Installer macOS
 
-　最後に<a href="https://dot.net/" target="_blank">.NET Core</a> macOS 版をダウンロードして，パッケージをインストールします。
+　最後に<a href="https://www.microsoft.com/net/download/core" target="_blank">.NET Core</a> macOS 版をダウンロードして，パッケージをインストールします。
 
 　以上で，環境構築が完了です。
 
@@ -134,7 +131,7 @@ ln -s /usr/local/opt/openssl/lib/libssl.1.0.0.dylib /usr/local/lib/
 
 ```bash
 StarWars
-├── project.json
+├── project.csproj
 ├── src
 │   ├── Domain
 │   │   └── StarWarsContext.cs
@@ -148,10 +145,9 @@ StarWars
 | ファイル／フォルダ     | 役割              | 説明             |
 |:--------------------|:------------------|:----------------|
 | StarWars            | プロジェクトのルート フォルダ | 実行時のエントリー ポイント名となります |
-| project.json        | パッケージ管理ファイル (NuGet 用) | npm の package.js に相当します。**VS Code は本ファイルを検知して OmniSharp (コード補完機能等) を有効化します**。 |
+| project.csproj      | パッケージ管理ファイル (NuGet 用) | npm の package.js に相当します。**VS Code は本ファイルを検知して OmniSharp (コード補完機能等) を有効化します**。 |
 | StarWarsContext.cs  | EFC Npgsql 用 DB 接続情報 | Postgres の DB 接続情報を記述します。DbContext と呼びます |
 | Director.cs         | EFC 用のテーブル／モデル | Postgres のテーブルに対応するモデルです |
-| Program.cs          | プログラムのエントリー ポイント  | ※EFC コマンドを使用するために不要でも書かなければならない Main メソッドです |
 | StarWarsCrudTest.cs | xUnit.net 用の自動テストコード | テストファイルです |
 
 
@@ -164,7 +160,7 @@ StarWars
 
 | パッケージ    | 役割              | 説明             |
 |:-------------------|:------------------|:----------------|
-| <a href="https://ef.readthedocs.org/en/latest/index.html" target="_blank">Entity Framework Core</a> | O/RM | CRUD やトランザクションの制御だけではなくテーブルの自動作成やマイグレーションも可能です | 
+| <a href="https://docs.microsoft.com/en-us/ef/" target="_blank">Entity Framework Core</a> | O/RM | CRUD やトランザクションの制御だけではなくテーブルの自動作成やマイグレーションも可能です | 
 | <a href="http://www.npgsql.org/" target="_blank">Npgsql</a> | EFC Postgres データ プロバイダー | EFC で Postgres への接続を可能にします |
 | <a href="https://xunit.github.io/docs/getting-started-dotnet-core.html" target="_blank">xUnit.net</a> | 自動テストコード | macOS の ASP.NET Core でも実行可能なユニット テスト フレームワークです |
 
@@ -172,38 +168,37 @@ StarWars
 
 　NuGet によるパッケージ管理ファイルは以下のとおりです。
 
-```json:project.json
-{
-  "version": "1.0.0-*",
-  "buildOptions": {
-    "debugType": "portable",
-    "emitEntryPoint": true
-  },
-  "dependencies": {
-    "Npgsql.EntityFrameworkCore.PostgreSQL": "1.1.0",
-    "Microsoft.EntityFrameworkCore.Design": {
-      "version": "1.1.0",
-      "type": "build"
-    },
-    "xunit": "2.2.0-beta4-build3444",
-    "dotnet-test-xunit": "2.2.0-preview2-build1029",
-    "Microsoft.Extensions.PlatformAbstractions": "1.1.0"
-  },
-  "frameworks": {
-    "netcoreapp1.1": {
-      "dependencies": {
-        "Microsoft.NETCore.App": {
-          "type": "platform",
-          "version": "1.1.0"
-        }
-      }
-    }
-  },
-  "tools": {
-    "Microsoft.EntityFrameworkCore.Tools.DotNet": "1.1.0-preview4-final"
-  },
-  "testRunner": "xunit"
-}
+```xml:project.csproj
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <AssemblyName>StarWars</AssemblyName>
+    <PackageId>StarWars</PackageId>
+    <VersionPrefix>1.0.0</VersionPrefix>
+    <TargetFramework>netcoreapp1.1</TargetFramework>
+    <OutputType>Library</OutputType>
+    <DebugType>portable</DebugType>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
+    <RuntimeFrameworkVersion>1.1.1</RuntimeFrameworkVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.0.0" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.2.0" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="1.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="1.1.1">
+      <PrivateAssets>All</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="xunit" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.PlatformAbstractions" Version="1.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="1.0.0" />
+  </ItemGroup>
+
+</Project>
 ```
 
 　NuGet でパッケージを取得するコマンドは以下の通りです。
@@ -211,38 +206,6 @@ StarWars
 ```bash
 dotnet restore
 ```
-
-## .NET Core コンソール アプリケーション
-
-　.NET Core のパッケージを管理する project.json では，コンパイラにプロジェクトが「コンソール アプリケーション」なのか「クラス ライブラリ」なのかを指定します。EFC コマンドを使用するにはコンソール アプリでなければ使用できない制限事項が（なぜか）あります。そのため，以下の設定を記述しています。
-
-```json:project.json
-  "buildOptions": {
-    "emitEntryPoint": true
-```
-
-　コンソール アプリを指定した場合はプログラムのエントリー ポイント Main メソッドを作成する必要が生じます。
-
-```csharp:Program.cs
-using System;
-namespace StarWars
-{
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            Console.WriteLine("Hello World!");
-        }
-    }
-}
-```
-
-　コンソール アプリを起動するには以下のコマンドを実行します。
-
-```bash
-dotnet run
-```
-
 
 ## Entity Framework Core
 
@@ -345,7 +308,7 @@ dotnet ef database update
 
 ### Test/StarWarsCrudTest.cs
 
-　xUnit.net を使って EFC から Postgres に Insert するテストコードは以下のとおりです。
+　xUnit.net を使って EFC から Postgres に Select，Delete，Insert するテストコードは以下のとおりです。
 
 ```csharp:StarWarsCrudTest.cs
 using System;
@@ -372,11 +335,23 @@ namespace StarWars.Test
                 };
 
                 // act
+                // SELECT
+                var dirEp7Db = db.Directors.Find(dirEp7.DirectorId);
+
+                // DELETE
+                if (dirEp7Db != null)
+                {
+                db.Directors.Remove(dirEp7Db);
+                db.SaveChanges();
+                }
+
+                // INSERT
                 db.Directors.Add(dirEp7);
-                var count = db.SaveChanges();
+                var countIns = db.SaveChanges();
 
                 // assert
-                Assert.Equal(1, count);
+                Assert.Equal(1, countIns);
+                Assert.Equal("J. J. Abrams", dirEp7Db.Name);
             }
         }
     }
@@ -393,16 +368,16 @@ dotnet test
 
 ```bash
 bash$ dotnet test
-Project StarWars (.NETCoreApp,Version=v1.1) was previously compiled. Skipping compila
-tion.
-xUnit.net .NET CLI test runner (64-bit .NET Core osx.10.12-x64)
-  Discovering: StarWars
-  Discovered:  StarWars
-  Starting:    StarWars
-  Finished:    StarWars
-=== TEST EXECUTION SUMMARY ===
-   StarWars  Total: 1, Errors: 0, Failed: 0, Skipped: 0, Time: 1.070s
-SUMMARY: Total: 1 targets, Passed: 1, Failed: 0.
+Microsoft (R) Test Execution Command Line Tool Version 15.0.0.0
+Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Starting test execution, please wait...
+[xUnit.net 00:00:00.6235341]   Discovering: StarWars
+[xUnit.net 00:00:00.7345812]   Discovered:  StarWars
+[xUnit.net 00:00:00.8056868]   Starting:    StarWars
+[xUnit.net 00:00:02.0368794]   Finished:    StarWars
+
+Total tests: 1. Passed: 1. Failed: 0. Skipped: 0.
 ```
 
 ![EFCCreate.png](https://qiita-image-store.s3.amazonaws.com/0/67778/24be3cf9-3c95-f2a3-2b45-50fce22ca40b.png)
@@ -415,7 +390,7 @@ SUMMARY: Total: 1 targets, Passed: 1, Failed: 0.
 * NuGet を使用したパッケージ管理ができた
 * EFC のコード ファーストが実践できた
 * EFC で Postgres がマイグレーションできた
-* EFC で Postgres に C ~~RUD~~ できた
+* EFC で Postgres に C R~~U~~D できた
 * xUnit.net で 自動テストコードが書けた
 * ~~Kestrel Web サーバ上に ASP.NET Core を配備して Star Wars ができた~~
 
@@ -473,6 +448,15 @@ sudo rm -rf /usr/local/share/dotnet/
 
 　dotnet ef コマンドが使用できない場合は，project.json ファイルの `emitEntryPoint` を `true` に設定して，project がコンソール アプリであることを明記することで解決します。 
 
+## .NET Core プロジェクトから .csproj 形式への移行 (2017/3/13)
+
+[.NET Core は project.json から .csproj へ移行しています](https://docs.microsoft.com/ja-jp/dotnet/articles/core/migration/)。
+project.json を .csproj にマイグレーションするコマンドは以下のとおりです。
+
+```bash
+dotnet migrate
+```
+
 # 参考ノート
 
  1. Entity Framework Documentation, "Getting Started on OS X", https://docs.efproject.net/en/latest/platforms/coreclr/getting-started-osx.html
@@ -494,3 +478,4 @@ Overview", http://dotnet.github.io/docs/core-concepts/dnx-migration.html
  1. Microsoft, "Entity Framework Core", https://docs.microsoft.com/en-us/ef/core/index
  1. .Net Blog, "Announcing .NET Core 1.1", https://blogs.msdn.microsoft.com/dotnet/2016/11/16/announcing-net-core-1-1/
  1. .NET Blog, "Announcing Entity Framework Core 1.1", https://blogs.msdn.microsoft.com/dotnet/2016/11/16/announcing-entity-framework-core-1-1/
+ 1. Microsoft Docs, 「project.json プロパティと csproj プロパティの間のマッピング」, https://docs.microsoft.com/ja-jp/dotnet/articles/core/tools/project-json-to-csproj

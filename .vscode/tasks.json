@@ -13,6 +13,14 @@
             "problemMatcher": "$msCompile"
         },
         {
+            "taskName": "run",
+            "args": [
+                ""
+            ],
+            "isBuildCommand": true,
+            "problemMatcher": "$msCompile"
+        },
+        {
             "taskName": "test",
             "args": [
                 ""
