@@ -175,19 +175,19 @@ StarWars
     <AssemblyName>StarWars</AssemblyName>
     <PackageId>StarWars</PackageId>
     <VersionPrefix>1.0.0</VersionPrefix>
-    <TargetFramework>netcoreapp1.1</TargetFramework>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
     <OutputType>Library</OutputType>
     <DebugType>portable</DebugType>
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
     <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
-    <RuntimeFrameworkVersion>1.1.1</RuntimeFrameworkVersion>
+    <RuntimeFrameworkVersion>2.0.0</RuntimeFrameworkVersion>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.0.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.3.0" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.2.0" />
-    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="1.1.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="1.1.1">
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.0.0">
       <PrivateAssets>All</PrivateAssets>
     </PackageReference>
     <PackageReference Include="xunit" Version="2.2.0" />
@@ -195,7 +195,7 @@ StarWars
   </ItemGroup>
 
   <ItemGroup>
-    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="1.0.0" />
+    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.0" />
   </ItemGroup>
 
 </Project>
@@ -349,6 +349,9 @@ namespace StarWars.Test
                 db.Directors.Add(dirEp7);
                 var countIns = db.SaveChanges();
 
+                // SELECT
+                dirEp7Db = db.Directors.Find(dirEp7.DirectorId);
+
                 // assert
                 Assert.Equal(1, countIns);
                 Assert.Equal("J. J. Abrams", dirEp7Db.Name);
@@ -457,6 +460,11 @@ project.json を .csproj にマイグレーションするコマンドは以下�
 dotnet migrate
 ```
 
+## Announcing .NET Core 2.0, Announcing Entity Framework Core 2.0 (2017/8/14)
+
+　.NET Core 2.0.0 と Entity Framework Core 2.0.0 がリリースされました。
+
+
 # 参考ノート
 
  1. Entity Framework Documentation, "Getting Started on OS X", https://docs.efproject.net/en/latest/platforms/coreclr/getting-started-osx.html
@@ -479,3 +487,5 @@ Overview", http://dotnet.github.io/docs/core-concepts/dnx-migration.html
  1. .Net Blog, "Announcing .NET Core 1.1", https://blogs.msdn.microsoft.com/dotnet/2016/11/16/announcing-net-core-1-1/
  1. .NET Blog, "Announcing Entity Framework Core 1.1", https://blogs.msdn.microsoft.com/dotnet/2016/11/16/announcing-entity-framework-core-1-1/
  1. Microsoft Docs, 「project.json プロパティと csproj プロパティの間のマッピング」, https://docs.microsoft.com/ja-jp/dotnet/articles/core/tools/project-json-to-csproj
+ 1. .NET Blog, "Announcing .NET Core 2.0", https://blogs.msdn.microsoft.com/dotnet/2017/08/14/announcing-net-core-2-0/
+ 

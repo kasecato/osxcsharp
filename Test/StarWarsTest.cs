@@ -37,6 +37,9 @@ namespace StarWars.Test
         db.Directors.Add(dirEp7);
         var countIns = db.SaveChanges();
 
+        // SELECT
+        dirEp7Db = db.Directors.Find(dirEp7.DirectorId);
+
         // assert
         Assert.Equal(1, countIns);
         Assert.Equal("J. J. Abrams", dirEp7Db.Name);

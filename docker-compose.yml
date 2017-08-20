@@ -1,0 +1,11 @@
+version: '3.3'
+services:
+  db:
+    build: ./postgres
+    container_name: postgres-starwars
+    environment:
+      POSTGRES_USER: c3po
+      POSTGRES_PASSWORD: r2d2
+      POSTGRES_DB: starwars
+    ports:
+      - 15432:5432
