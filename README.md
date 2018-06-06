@@ -103,21 +103,9 @@
 
 　.NET Core ツール（dotnet）はパッケージ管理や .NET アプリケーションをビルド&実行&テストするためのツールです。
 
-### OpenSSL
-
-　インストールには OpenSSL が必要です。
-
-```bash
-brew update
-brew install openssl
-mkdir -p /usr/local/lib
-ln -s /usr/local/opt/openssl/lib/libcrypto.1.0.0.dylib /usr/local/lib/
-ln -s /usr/local/opt/openssl/lib/libssl.1.0.0.dylib /usr/local/lib/
-```
-
 ### .NET Core Installer macOS
 
-　最後に<a href="https://www.microsoft.com/net/download/core" target="_blank">.NET Core</a> macOS 版をダウンロードして，パッケージをインストールします。
+　最後に<a href="https://www.microsoft.com/net/download" target="_blank">.NET Core</a> macOS 版をダウンロードして，パッケージをインストールします。
 
 　以上で，環境構築が完了です。
 
@@ -160,7 +148,7 @@ StarWars
 
 | パッケージ    | 役割              | 説明             |
 |:-------------------|:------------------|:----------------|
-| <a href="https://docs.microsoft.com/en-us/ef/" target="_blank">Entity Framework Core</a> | O/RM | CRUD やトランザクションの制御だけではなくテーブルの自動作成やマイグレーションも可能です | 
+| <a href="https://docs.microsoft.com/en-us/ef/#pivot=efcore" target="_blank">Entity Framework Core</a> | O/RM | CRUD やトランザクションの制御だけではなくテーブルの自動作成やマイグレーションも可能です | 
 | <a href="http://www.npgsql.org/" target="_blank">Npgsql</a> | EFC Postgres データ プロバイダー | EFC で Postgres への接続を可能にします |
 | <a href="https://xunit.github.io/docs/getting-started-dotnet-core.html" target="_blank">xUnit.net</a> | 自動テストコード | macOS の ASP.NET Core でも実行可能なユニット テスト フレームワークです |
 
@@ -175,19 +163,19 @@ StarWars
     <AssemblyName>StarWars</AssemblyName>
     <PackageId>StarWars</PackageId>
     <VersionPrefix>1.0.0</VersionPrefix>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
     <OutputType>Library</OutputType>
     <DebugType>portable</DebugType>
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
     <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
-    <RuntimeFrameworkVersion>2.0.5</RuntimeFrameworkVersion>
+    <RuntimeFrameworkVersion>2.1.0</RuntimeFrameworkVersion>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.5.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.7.2" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
-    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.0.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.0.1">
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.1.0">
       <PrivateAssets>All</PrivateAssets>
     </PackageReference>
     <PackageReference Include="xunit" Version="2.3.1" />
@@ -195,7 +183,7 @@ StarWars
   </ItemGroup>
 
   <ItemGroup>
-    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.1" />
+    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.3" />
   </ItemGroup>
 
 </Project>
@@ -371,16 +359,17 @@ dotnet test
 
 ```bash
 bash$ dotnet test
-Microsoft (R) Test Execution Command Line Tool Version 15.0.0.0
+Build completed.
+
+Test run for bin/Debug/netcoreapp2.1/StarWars.dll(.NETCoreApp,Version=v2.1)
+Microsoft (R) Test Execution Command Line Tool Version 15.7.0
 Copyright (c) Microsoft Corporation.  All rights reserved.
 
 Starting test execution, please wait...
-[xUnit.net 00:00:00.6235341]   Discovering: StarWars
-[xUnit.net 00:00:00.7345812]   Discovered:  StarWars
-[xUnit.net 00:00:00.8056868]   Starting:    StarWars
-[xUnit.net 00:00:02.0368794]   Finished:    StarWars
 
 Total tests: 1. Passed: 1. Failed: 0. Skipped: 0.
+Test Run Successful.
+Test execution time: 4.0315 Seconds
 ```
 
 ![EFCCreate.png](https://qiita-image-store.s3.amazonaws.com/0/67778/24be3cf9-3c95-f2a3-2b45-50fce22ca40b.png)
@@ -402,7 +391,7 @@ Total tests: 1. Passed: 1. Failed: 0. Skipped: 0.
 
 　今回のソースコードを GitHub に掲載しました。ご利用ください。
 
-　GitHub, "osxcsharp", https://github.com/k--kato/osxcsharp/
+　GitHub, "osxcsharp", https://github.com/kasecato/osxcsharp/
 
 ## ASP.NET 5 is dead (2016/1/19)
 
@@ -464,6 +453,10 @@ dotnet migrate
 
 　.NET Core 2.0.0 と Entity Framework Core 2.0.0 がリリースされました。
 
+## Announcing .NET Core 2.1, Announcing Entity Framework Core 2.1 (2018/5/30)
+
+　.NET Core 2.1.0 と Entity Framework Core 2.1.0 がリリースされました。
+
 
 # 参考ノート
 
@@ -488,4 +481,5 @@ Overview", http://dotnet.github.io/docs/core-concepts/dnx-migration.html
  1. .NET Blog, "Announcing Entity Framework Core 1.1", https://blogs.msdn.microsoft.com/dotnet/2016/11/16/announcing-entity-framework-core-1-1/
  1. Microsoft Docs, 「project.json プロパティと csproj プロパティの間のマッピング」, https://docs.microsoft.com/ja-jp/dotnet/articles/core/tools/project-json-to-csproj
  1. .NET Blog, "Announcing .NET Core 2.0", https://blogs.msdn.microsoft.com/dotnet/2017/08/14/announcing-net-core-2-0/
- 
+ 1. .NET Blog, "Announcing .NET Core 2.1", https://blogs.msdn.microsoft.com/dotnet/2018/05/30/announcing-net-core-2-1/
+ 1. .NET Blog, "Announcing Entity Framework Core 2.1", https://blogs.msdn.microsoft.com/dotnet/2018/05/30/announcing-entity-framework-core-2-1/
