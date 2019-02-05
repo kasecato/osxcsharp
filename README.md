@@ -16,7 +16,7 @@
 
 ## Visual C# (Windows)
 
-　C# 標準の言語実装は <a href="https://ja.wikipedia.org/wiki/%E3%82%A2%E3%83%B3%E3%83%80%E3%83%BC%E3%82%B9%E3%83%BB%E3%83%98%E3%83%AB%E3%82%B9%E3%83%90%E3%83%BC%E3%82%B0" target="_blank">アンダース・ヘルスバーグ</a> (Typescript のお父さん) による Microsoft <a href="https://msdn.microsoft.com/ja-jp/library/kx37x362.aspx" target="_blank">Visual C#</a> (2000年，2002年) が最も有名です。C# といえば多くの文脈で 「Windows 上の Visual Studio で開発される Visual C#」を意味していました。
+　C# 標準の言語実装は <a href="https://ja.wikipedia.org/wiki/%E3%82%A2%E3%83%B3%E3%83%80%E3%83%BC%E3%82%B9%E3%83%BB%E3%83%98%E3%83%AB%E3%82%B9%E3%83%90%E3%83%BC%E3%82%B0" target="_blank">アンダース・ヘルスバーグ</a> (Typescript のお父さん) による Microsoft <a href="https://docs.microsoft.com/en-us/dotnet/csharp/" target="_blank">Visual C#</a> (2000年，2002年) が最も有名です。C# といえば多くの文脈で 「Windows 上の Visual Studio で開発される Visual C#」を意味していました。
 
 　C# の Web 開発 = Windows = **商用非公開** （安心のベンダー サポートは付く）エンタープライズ開発の印象が強く，オープンで活発なコミュニティを基盤に，ドキュメントやナレッジ コミュニティが充実した OSS が主流の Web 界隈とは長らく一線を画していたように思います。
 
@@ -31,7 +31,7 @@
 
 　モバイルの分野では，Mono から派生した Xamarin （ザマリン）（2011年）や Unity (2005年) の登場で，C# による Android，iOS のネイティブ／ゲーム アプリも開発できるようになりました。
 
-　Xamarin は 本家 Visual Studio 2015 より標準でインストールできるようになり，Android のデザイナー，デバッガ，エミュレータまでも VS 2015 にはあります。<a href="http://www.idc.com/prodserv/smartphone-os-market-share.jsp" target="_blank">モバイル分野で後塵を拝した Microsoft</a> が本気になっているようです。
+　Xamarin は 本家 Visual Studio 2015 より標準でインストールできるようになり，Android のデザイナー，デバッガ，エミュレータまでも VS 2015 にはあります。<a href="https://www.idc.com/promo/smartphone-market-share/os" target="_blank">モバイル分野で後塵を拝した Microsoft</a> が本気になっているようです。
 
 <a href="http://www.slideshare.net/chack411/net-core-5-windows-linux-os-x-docker" targe="_blanl">![VS2015.png](https://qiita-image-store.s3.amazonaws.com/0/67778/c472feec-9f9a-a24f-6fe5-8fa1d3d227f6.png)</a>
 
@@ -49,13 +49,13 @@
 
 # VS Code (Linux, Mac, Windows)
 
-　Visual Studio Code (VS Code) は Linux，Mac，Windows 上で無料で利用できる ~~<a href="https://atom.io/" target="_blank">Atom</a>~~ <a href="http://electron.atom.io/" target="_blank">Electron</a> を拡張したテキスト エディターです。テキスト エディターですが，実際に C# の開発に利用してみると，本家 IDE の Windows Visual Studio に匹敵する機能があり，本格的な C# 開発に耐えられるレベルの機能が備わっていると感じます。
+　Visual Studio Code (VS Code) は Linux，Mac，Windows 上で無料で利用できる ~~<a href="https://atom.io/" target="_blank">Atom</a>~~ <a href="https://electronjs.org/" target="_blank">Electron</a> を拡張したテキスト エディターです。テキスト エディターですが，実際に C# の開発に利用してみると，本家 IDE の Windows Visual Studio に匹敵する機能があり，本格的な C# 開発に耐えられるレベルの機能が備わっていると感じます。
 
 　VS Code は導入も動作も軽量で素晴らしく，必要なモジュールのみをパッケージ管理 NuGet (ヌゲット，ニューゲット) で取得するスタイルは，**モダンな Web 開発のフローに慣れた Web 開発者にとても親しみやすく構成されている**と思います。
 
 　逆に，従来の Windows Visual Studio が提供するリッチな GUI サポートで Web 開発に慣れた開発者にとっては，VS Code は 近年の移り変わりの激しい Web 開発技術の学習コストが高い割に，生産性が低く難解なもののように感じるのではないかと思われます。
 
-　Windows 版 Visual Studio の生産性を macOS で追求するには，2016 年 11 月 17 日 にプレビュー版がリリースされた [Visual Studio for Mac](https://www.visualstudio.com/vs/visual-studio-mac/) をぜひ使用してみてください。（これから本稿で紹介するプロジェクト構成の知識をすべて VS for Mac が吸収しますので，開発者はプロダクトに集中することができます。）
+　Windows 版 Visual Studio の生産性を macOS で追求するには，2016 年 11 月 17 日 にプレビュー版がリリースされた [Visual Studio for Mac](https://visualstudio.microsoft.com/vs/mac/) をぜひ使用してみてください。（これから本稿で紹介するプロジェクト構成の知識をすべて VS for Mac が吸収しますので，開発者はプロダクトに集中することができます。）
 
 　脱線しましたが，VS Code で実際に C# 開発を検証した結果をまとめました。
 
@@ -105,13 +105,13 @@
 
 ### .NET Core Installer macOS
 
-　最後に<a href="https://www.microsoft.com/net/download" target="_blank">.NET Core</a> macOS 版をダウンロードして，パッケージをインストールします。
+　最後に<a href="https://dotnet.microsoft.com/download" target="_blank">.NET Core</a> macOS 版をダウンロードして，パッケージをインストールします。
 
 　以上で，環境構築が完了です。
 
 # 開発
 
-　Hello World といえば，コンソールに Hello World を出力することです。<a href="http://rosettacode.org/wiki/Category:Programming_Languages" target="_blank">Rosetta Code には 595 の 言語で Hello World</a> が刻まれています。
+　Hello World といえば，コンソールに Hello World を出力することです。<a href="http://rosettacode.org/wiki/Category:Programming_Languages" target="_blank">Rosetta Code には 714 の 言語で Hello World</a> が刻まれています。
 
 　Hello World をファイルに書き込んで，出力することが Hello World 1.5 とすると，Hello World 2.0 は Star Wars の監督を Web 出力することなのかもしれません。 
 
@@ -120,6 +120,7 @@
 ```bash
 StarWars
 ├── project.csproj
+├── docker-compose.yml
 ├── src
 │   ├── Domain
 │   │   └── StarWarsContext.cs
@@ -134,6 +135,7 @@ StarWars
 |:--------------------|:------------------|:----------------|
 | StarWars            | プロジェクトのルート フォルダ | 実行時のエントリー ポイント名となります |
 | project.csproj      | パッケージ管理ファイル (NuGet 用) | npm の package.js に相当します。**VS Code は本ファイルを検知して OmniSharp (コード補完機能等) を有効化します**。 |
+| docker-compose.yml  | EFC Npgsql 用 DB | Docker で Postgres をインストール & 起動します |
 | StarWarsContext.cs  | EFC Npgsql 用 DB 接続情報 | Postgres の DB 接続情報を記述します。DbContext と呼びます |
 | Director.cs         | EFC 用のテーブル／モデル | Postgres のテーブルに対応するモデルです |
 | StarWarsCrudTest.cs | xUnit.net 用の自動テストコード | テストファイルです |
@@ -141,7 +143,7 @@ StarWars
 
 ## NuGet パッケージ管理 
 
-　<a href="https://msdn.microsoft.com/ja-jp/library/dn878908%28v=vs.110%29.aspx" targe="_blank">*.NET Core は，小規模のアセンブリ パッケージで NuGet を介してリリースされるためモジュール形式となっています。</a>*
+　<a href="https://docs.microsoft.com/ja-jp/dotnet/framework/get-started/net-core-and-open-source" targe="_blank">*.NET Core は，小規模のアセンブリ パッケージで NuGet を介してリリースされるためモジュール形式となっています。</a>*
 
 　Hello World 2.0 で必要なパッケージは NuGet で入手します。json を書いてコマンドを実行すると，プロジェクトに必要なパッケージの依存関係を自動で解決してくれます。バージョンアップも 1 コマンドです。VS Code であれば ~~package.json~~ project.json を変更して保存すると自動でパッケージの取得ダイアログを表示してくれるので便利です。
 
@@ -150,7 +152,7 @@ StarWars
 |:-------------------|:------------------|:----------------|
 | <a href="https://docs.microsoft.com/en-us/ef/#pivot=efcore" target="_blank">Entity Framework Core</a> | O/RM | CRUD やトランザクションの制御だけではなくテーブルの自動作成やマイグレーションも可能です | 
 | <a href="http://www.npgsql.org/" target="_blank">Npgsql</a> | EFC Postgres データ プロバイダー | EFC で Postgres への接続を可能にします |
-| <a href="https://xunit.github.io/docs/getting-started-dotnet-core.html" target="_blank">xUnit.net</a> | 自動テストコード | macOS の ASP.NET Core でも実行可能なユニット テスト フレームワークです |
+| <a href="https://xunit.github.io/docs/getting-started/netcore/cmdline" target="_blank">xUnit.net</a> | 自動テストコード | macOS の ASP.NET Core でも実行可能なユニット テスト フレームワークです |
 
 ### project.json
 
@@ -163,27 +165,28 @@ StarWars
     <AssemblyName>StarWars</AssemblyName>
     <PackageId>StarWars</PackageId>
     <VersionPrefix>1.0.0</VersionPrefix>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
     <OutputType>Library</OutputType>
     <DebugType>portable</DebugType>
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
     <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
-    <RuntimeFrameworkVersion>2.1.0</RuntimeFrameworkVersion>
+    <RuntimeFrameworkVersion>2.2.0</RuntimeFrameworkVersion>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.7.2" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
-    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.1.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.1.0">
-      <PrivateAssets>All</PrivateAssets>
-    </PackageReference>
-    <PackageReference Include="xunit" Version="2.3.1" />
-    <PackageReference Include="Microsoft.Extensions.PlatformAbstractions" Version="1.1.0" />
-  </ItemGroup>
+    <!-- xUnit.net -->
+    <!-- https://xunit.github.io/docs/getting-started/netcore/cmdline -->
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
+    <PackageReference Include="xunit" Version="2.4.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1" />
 
-  <ItemGroup>
-    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.3" />
+    <!-- Npgsql Entity Framework Core -->
+    <!-- http://www.npgsql.org/efcore/index.html -->
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.2.0" />
+
+    <!-- The dotnet ef commands are included in the .NET Core SDK, but to enable the commands you have to install the Microsoft.EntityFrameworkCore.Design package. -->
+    <!-- https://docs.microsoft.com/en-us/ef/core/miscellaneous/cli/dotnet#ef-core-2x-not-aspnet-core -->
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.2.0" />
   </ItemGroup>
 
 </Project>
@@ -192,7 +195,7 @@ StarWars
 　NuGet でパッケージを取得するコマンドは以下の通りです。
 
 ```bash
-dotnet restore
+$ dotnet restore
 ```
 
 ## Entity Framework Core
@@ -225,7 +228,6 @@ namespace StarWars.Model
 
 ```csharp:StarWarsContext.cs
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.PlatformAbstractions;
 using StarWars.Model;
 
 namespace StarWars.Domain
@@ -235,12 +237,35 @@ namespace StarWars.Domain
         public DbSet<Director> Directors { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            var path = PlatformServices.Default.Application.ApplicationBasePath;
-            optionsBuilder.UseNpgsql("Host=localhost;Username=c3po;Password=r2d2;Database=starwars");
-        }
+            => optionsBuilder.UseNpgsql("Host=localhost;Database=starwars;Port=15432;Username=c3po;Password=r2d2");
     }
 }
+```
+
+### Postgres を Docker で起動
+
+　Postgres を Docker で起動するため，[macOS 版 Docker](https://hub.docker.com/editions/community/docker-ce-desktop-mac) をインストールしてください。
+
+　`docker-compose.yml` を次の通り記述して，Postgres と接続情報を設定します。
+
+```yaml:docker-compose.yml
+version: '3.7'
+services:
+  db:
+    build: ./postgres
+    container_name: postgres-starwars
+    environment:
+      POSTGRES_USER: c3po
+      POSTGRES_PASSWORD: r2d2
+      POSTGRES_DB: starwars
+    ports:
+      - 5432:5432
+```
+
+　次の Docker コマンドで Postgres を起動します。
+
+```bash
+$ docker-compose up
 ```
 
 ### EFC マイグレーション
@@ -248,7 +273,7 @@ namespace StarWars.Domain
 　DbContext とモデルからマイグレーションに必要なプログラムを自動生成するコマンドは以下のとおりです。
 
 ```bash
-dotnet ef migrations add StarWarsEp7
+$ dotnet ef migrations add StarWarsEp7
 ```
 
 　上記コマンドで Migrations フォルダが作成され，Migrations フォルダの中に自動生成されたマイグレーション プログラムの断面が保存され続けます。
@@ -256,10 +281,29 @@ dotnet ef migrations add StarWarsEp7
 　Postgres にデータベースとテーブルを反映するコマンドは以下のとおりです。
 
 ```bash
-dotnet ef database update
+$ dotnet ef database update
 ```
 
 ![EFCMigrationsUpdate.png](https://qiita-image-store.s3.amazonaws.com/0/67778/b4127220-5c67-7350-8a2e-5885698a9877.png)
+
+　コマンド (CLI) で確認する方法は次のとおりです。
+
+```bash
+$ docker exec -it postgres-starwars bash
+# psql -U c3po -d starwars
+# \d "Directors"
+                                   Table "public.Directors"
+   Column   |  Type   | Collation | Nullable |                     Default
+------------+---------+-----------+----------+-------------------------------------------------
+ DirectorId | integer |           | not null | nextval('"Directors_DirectorId_seq"'::regclass)
+ Episode    | integer |           | not null |
+ Name       | text    |           |          |
+Indexes:
+    "PK_Directors" PRIMARY KEY, btree ("DirectorId")
+
+# \quit
+# exit
+```
 
 　モデリングしたとおりに starwars データベースと Director テーブルが作成されました。EFC 管理用の __EFMigrationsHistory も作成されています。
 
@@ -285,12 +329,29 @@ namespace StarWars.Model
 　最初とは別名でマイグレーションを実行します。
 
 ```bash
-dotnet ef migrations add StarWarsEp7.2
-dotnet ef database update
+$ dotnet ef migrations add StarWarsEp7.2
+$ dotnet ef database update
 ```
 
 ![EFCMigrationsUpdate2.png](https://qiita-image-store.s3.amazonaws.com/0/67778/b0b7fe02-715d-fc58-3c7d-e8614ea1ea20.png)
 
+```bash
+$ docker exec -it postgres-starwars bash
+# psql -U c3po -d starwars
+# \d "Directors"
+                                               Table "public.Directors"
+   Column   |            Type             | Collation | Nullable |                      Default
+------------+-----------------------------+-----------+----------+----------------------------------------------------
+ DirectorId | integer                     |           | not null | nextval('"Directors_DirectorId_seq"'::regclass)
+ Episode    | integer                     |           | not null |
+ Name       | text                        |           |          |
+ Born       | timestamp without time zone |           | not null | '0001-01-01 00:00:00'::timestamp without time zone
+Indexes:
+    "PK_Directors" PRIMARY KEY, btree ("DirectorId")
+
+# \quit
+# exit
+```
 
 　追加した項目 Born が追加されました。マイグレーションしたテーブルにすでにデータが存在する場合は，自動で初期値が設定されます。もちろんアトリビュートを使えば初期値，主キーや文字列長など細かく設定できます。
 
@@ -352,29 +413,39 @@ namespace StarWars.Test
 　テストコードを実行するコマンドは以下のとおりです。
 
 ```bash
-dotnet test
+$ dotnet test
 ```
 
 　実行結果
 
 ```bash
-bash$ dotnet test
+$ dotnet test
+Build started, please wait...
 Build completed.
 
-Test run for bin/Debug/netcoreapp2.1/StarWars.dll(.NETCoreApp,Version=v2.1)
-Microsoft (R) Test Execution Command Line Tool Version 15.7.0
+Test run for /Users/kasecato/GitHub/kasecato/osxcsharp/bin/Debug/netcoreapp2.2/StarWars.dll(.NETCoreApp,Version=v2.2)
+Microsoft (R) Test Execution Command Line Tool Version 15.9.0
 Copyright (c) Microsoft Corporation.  All rights reserved.
 
 Starting test execution, please wait...
 
 Total tests: 1. Passed: 1. Failed: 0. Skipped: 0.
 Test Run Successful.
-Test execution time: 4.0315 Seconds
+Test execution time: 4.4572 Seconds
 ```
 
 ![EFCCreate.png](https://qiita-image-store.s3.amazonaws.com/0/67778/24be3cf9-3c95-f2a3-2b45-50fce22ca40b.png)
 
-
+```bash
+$ docker exec -it postgres-starwars bash
+# psql -U c3po -d starwars
+# select * from "Directors";
+ DirectorId | Episode |     Name     |        Born
+------------+---------+--------------+---------------------
+          4 |       7 | J. J. Abrams | 1966-06-27 00:00:00
+# \quit
+# exit
+```
 
 # まとめ
  
@@ -432,9 +503,9 @@ xunit.runner.dnx | dotnet-test-xunit
 　1.1.0 以前の環境が構築されていて，dotnet restore で porject.json のエラーが発生する場合は，以下の[手順](http://iamnotmyself.com/2016/06/27/installing-net-core-1-0-on-a-dirty-osx/)を参考にしてください。
 
 ```bash
-sudo nuget update -self
-nuget locals all -clear
-sudo rm -rf /usr/local/share/dotnet/
+$ sudo nuget update -self
+$ nuget locals all -clear
+$ sudo rm -rf /usr/local/share/dotnet/
 # 最新の .NET Core 1.1 SDK をインストールする
 ```
 
@@ -446,7 +517,7 @@ sudo rm -rf /usr/local/share/dotnet/
 project.json を .csproj にマイグレーションするコマンドは以下のとおりです。
 
 ```bash
-dotnet migrate
+$ dotnet migrate
 ```
 
 ## Announcing .NET Core 2.0, Announcing Entity Framework Core 2.0 (2017/8/14)
@@ -457,6 +528,9 @@ dotnet migrate
 
 　.NET Core 2.1.0 と Entity Framework Core 2.1.0 がリリースされました。
 
+## Announcing .NET Core 2.2, Announcing Entity Framework Core 2.2 (2018/12/4)
+
+　.NET Core 2.2.0 と Entity Framework Core 2.2.0 がリリースされました。
 
 # 参考ノート
 
@@ -483,3 +557,6 @@ Overview", http://dotnet.github.io/docs/core-concepts/dnx-migration.html
  1. .NET Blog, "Announcing .NET Core 2.0", https://blogs.msdn.microsoft.com/dotnet/2017/08/14/announcing-net-core-2-0/
  1. .NET Blog, "Announcing .NET Core 2.1", https://blogs.msdn.microsoft.com/dotnet/2018/05/30/announcing-net-core-2-1/
  1. .NET Blog, "Announcing Entity Framework Core 2.1", https://blogs.msdn.microsoft.com/dotnet/2018/05/30/announcing-entity-framework-core-2-1/
+ 1. .NET Blog, "Announcing .NET Core 2.2", https://blogs.msdn.microsoft.com/dotnet/2018/12/04/announcing-net-core-2-2/
+ 1. .NET Blog, "Announcing Entity Framework Core 2.2", https://blogs.msdn.microsoft.com/dotnet/2018/12/04/announcing-entity-framework-core-2-2/
+ 

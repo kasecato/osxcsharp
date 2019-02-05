@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.PlatformAbstractions;
 using StarWars.Model;
 
 namespace StarWars.Domain
@@ -9,9 +8,6 @@ namespace StarWars.Domain
         public DbSet<Director> Directors { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            var path = PlatformServices.Default.Application.ApplicationBasePath;
-            optionsBuilder.UseNpgsql("Host=localhost;Port=15432;Username=c3po;Password=r2d2;Database=starwars");
-        }
+            => optionsBuilder.UseNpgsql("Host=localhost;Database=starwars;Port=15432;Username=c3po;Password=r2d2");
     }
 }
