@@ -165,28 +165,28 @@ StarWars
     <AssemblyName>StarWars</AssemblyName>
     <PackageId>StarWars</PackageId>
     <VersionPrefix>1.0.0</VersionPrefix>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
     <OutputType>Library</OutputType>
     <DebugType>portable</DebugType>
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
     <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
-    <RuntimeFrameworkVersion>2.2.0</RuntimeFrameworkVersion>
+    <RuntimeFrameworkVersion>3.0.0</RuntimeFrameworkVersion>
   </PropertyGroup>
 
   <ItemGroup>
     <!-- xUnit.net -->
     <!-- https://xunit.github.io/docs/getting-started/netcore/cmdline -->
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.3.0" />
     <PackageReference Include="xunit" Version="2.4.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1" />
 
     <!-- Npgsql Entity Framework Core -->
     <!-- http://www.npgsql.org/efcore/index.html -->
-    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.2.0" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="3.0.0-preview9" />
 
     <!-- The dotnet ef commands are included in the .NET Core SDK, but to enable the commands you have to install the Microsoft.EntityFrameworkCore.Design package. -->
     <!-- https://docs.microsoft.com/en-us/ef/core/miscellaneous/cli/dotnet#ef-core-2x-not-aspnet-core -->
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.0.0" />
   </ItemGroup>
 
 </Project>
@@ -249,7 +249,7 @@ namespace StarWars.Domain
 　`docker-compose.yml` を次の通り記述して，Postgres と接続情報を設定します。
 
 ```yaml:docker-compose.yml
-version: '3.7'
+version: '3'
 services:
   db:
     build: ./postgres
@@ -262,10 +262,22 @@ services:
       - 5432:5432
 ```
 
+```yaml:postgres/Dockerfile
+FROM postgres:11
+```
+
 　次の Docker コマンドで Postgres を起動します。
 
 ```bash
 $ docker-compose up
+```
+
+### EFC インストール
+
+　EF Core 3.0 より dotnet ef コマンドが .NET Core SDK に含まれなくなりました。パッケージをインストールするコマンドは以下のとおりです。
+
+```bash
+$ dotnet tool install --global dotnet-ef --version 3.0.0
 ```
 
 ### EFC マイグレーション
@@ -532,6 +544,10 @@ $ dotnet migrate
 
 　.NET Core 2.2.0 と Entity Framework Core 2.2.0 がリリースされました。
 
+## Announcing .NET Core 3.0, Announcing Entity Framework Core 3.0 (2019/9/24)
+
+　.NET Core 3.0 と Entity Framework Core 3.0 がリリースされました。
+
 # 参考ノート
 
  1. Entity Framework Documentation, "Getting Started on OS X", https://docs.efproject.net/en/latest/platforms/coreclr/getting-started-osx.html
@@ -559,4 +575,5 @@ Overview", http://dotnet.github.io/docs/core-concepts/dnx-migration.html
  1. .NET Blog, "Announcing Entity Framework Core 2.1", https://blogs.msdn.microsoft.com/dotnet/2018/05/30/announcing-entity-framework-core-2-1/
  1. .NET Blog, "Announcing .NET Core 2.2", https://blogs.msdn.microsoft.com/dotnet/2018/12/04/announcing-net-core-2-2/
  1. .NET Blog, "Announcing Entity Framework Core 2.2", https://blogs.msdn.microsoft.com/dotnet/2018/12/04/announcing-entity-framework-core-2-2/
- 
+ 1. .NET Blog, "Announcing .NET Core 3.0", https://devblogs.microsoft.com/dotnet/announcing-net-core-3-0/
+ 1. .NET Blog, "Announcing Entity Framework Core 3.0 and Entity Framework 6.3 General Availability", https://devblogs.microsoft.com/dotnet/announcing-ef-core-3-0-and-ef-6-3-general-availability/
