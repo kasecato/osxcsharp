@@ -93,7 +93,7 @@
 
 ## VS Code インストール
 
-　<a href="https://code.visualstudio.com/" target="_blank">Visual Studio Code</a> より，macOS 版をダウンロードしてください。 
+　<a href="https://code.visualstudio.com/" target="_blank">Visual Studio Code</a> より，macOS 版をダウンロードしてください。
 
 # 環境構築
 
@@ -106,6 +106,12 @@
 ### .NET Core Installer macOS
 
 　最後に<a href="https://dotnet.microsoft.com/download" target="_blank">.NET Core</a> macOS 版をダウンロードして，パッケージをインストールします。
+
+　コマンドでパッケージをインストールする場合は以下のとおりです。
+
+```bash
+$ brew cask install dotnet-sdk
+```
 
 　以上で，環境構築が完了です。
 
@@ -170,7 +176,7 @@ StarWars
     <DebugType>portable</DebugType>
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
     <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
-    <RuntimeFrameworkVersion>3.1.0</RuntimeFrameworkVersion>
+    <RuntimeFrameworkVersion>3.1.3</RuntimeFrameworkVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -182,11 +188,11 @@ StarWars
 
     <!-- Npgsql Entity Framework Core -->
     <!-- http://www.npgsql.org/efcore/index.html -->
-    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="3.1.0" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="3.1.2" />
 
     <!-- The dotnet ef commands are included in the .NET Core SDK, but to enable the commands you have to install the Microsoft.EntityFrameworkCore.Design package. -->
-    <!-- https://docs.microsoft.com/en-us/ef/core/miscellaneous/cli/dotnet#ef-core-2x-not-aspnet-core -->
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.0" />
+    <!-- https://docs.microsoft.com/en-us/ef/core/miscellaneous/cli/dotnet#ef-core-3x -->
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.3" />
   </ItemGroup>
 
 </Project>
@@ -277,13 +283,13 @@ $ docker-compose up
 　EF Core 3.0 より dotnet ef コマンドが .NET Core SDK に含まれなくなりました。パッケージをインストールするコマンドは以下のとおりです。
 
 ```bash
-$ dotnet tool install --global dotnet-ef --version 3.1.0
+$ dotnet tool install --global dotnet-ef --version 3.1.3
 ```
 
 　もし古いバージョンの 3.0.0 がインストールされている場合は，`update` コマンドを使用します。
 
 ```bash
-$ dotnet tool update --global dotnet-ef --version 3.1.0
+$ dotnet tool update --global dotnet-ef --version 3.1.3
 ```
 
 ### EFC マイグレーション
@@ -439,7 +445,7 @@ $ dotnet test
 ```bash
 $ dotnet test
 /Users/kasecato/osxcsharp/bin/Debug/netcoreapp3.1/StarWars.dll(.NETCoreApp,Version=v3.1) のテスト実行
-Microsoft (R) Test Execution Command Line Tool Version 16.3.0
+Microsoft (R) Test Execution Command Line Tool Version 16.5.0
 Copyright (c) Microsoft Corporation.  All rights reserved.
 
 テスト実行を開始しています。お待ちください...
@@ -589,3 +595,5 @@ Overview", http://dotnet.github.io/docs/core-concepts/dnx-migration.html
  1. .NET Blog, "Announcing Entity Framework Core 3.0 and Entity Framework 6.3 General Availability", https://devblogs.microsoft.com/dotnet/announcing-ef-core-3-0-and-ef-6-3-general-availability/
  1. .NET Blog, "Announcing .NET Core 3.1", https://devblogs.microsoft.com/dotnet/announcing-net-core-3-1/
  1. .NET Blog, "Announcing Entity Framework Core 3.1 and Entity Framework 6.4", https://devblogs.microsoft.com/dotnet/announcing-entity-framework-core-3-1-and-entity-framework-6-4/
+ 1. .NET Blog, ".NET Core March 2020 Updates – 2.1.17 and 3.1.3", https://devblogs.microsoft.com/dotnet/net-core-march-2020/
+ 
