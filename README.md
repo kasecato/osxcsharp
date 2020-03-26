@@ -188,7 +188,7 @@ StarWars
 
     <!-- Npgsql Entity Framework Core -->
     <!-- http://www.npgsql.org/efcore/index.html -->
-    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="3.1.2" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="3.1.3" />
 
     <!-- The dotnet ef commands are included in the .NET Core SDK, but to enable the commands you have to install the Microsoft.EntityFrameworkCore.Design package. -->
     <!-- https://docs.microsoft.com/en-us/ef/core/miscellaneous/cli/dotnet#ef-core-3x -->
