@@ -176,23 +176,23 @@ StarWars
     <DebugType>portable</DebugType>
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
     <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
-    <RuntimeFrameworkVersion>3.1.3</RuntimeFrameworkVersion>
+    <RuntimeFrameworkVersion>3.1.6</RuntimeFrameworkVersion>
   </PropertyGroup>
 
   <ItemGroup>
     <!-- xUnit.net -->
     <!-- https://xunit.github.io/docs/getting-started/netcore/cmdline -->
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.4.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.6.1" />
     <PackageReference Include="xunit" Version="2.4.1" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.2" />
 
     <!-- Npgsql Entity Framework Core -->
     <!-- http://www.npgsql.org/efcore/index.html -->
-    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="3.1.3" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="3.1.4" />
 
     <!-- The dotnet ef commands are included in the .NET Core SDK, but to enable the commands you have to install the Microsoft.EntityFrameworkCore.Design package. -->
     <!-- https://docs.microsoft.com/en-us/ef/core/miscellaneous/cli/dotnet#ef-core-3x -->
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.6" />
   </ItemGroup>
 
 </Project>
@@ -283,13 +283,13 @@ $ docker-compose up
 　EF Core 3.0 より dotnet ef コマンドが .NET Core SDK に含まれなくなりました。パッケージをインストールするコマンドは以下のとおりです。
 
 ```bash
-$ dotnet tool install --global dotnet-ef --version 3.1.3
+$ dotnet tool install --global dotnet-ef --version 3.1.6
 ```
 
 　もし古いバージョンの 3.0.0 がインストールされている場合は，`update` コマンドを使用します。
 
 ```bash
-$ dotnet tool update --global dotnet-ef --version 3.1.3
+$ dotnet tool update --global dotnet-ef --version 3.1.6
 ```
 
 ### EFC マイグレーション
@@ -444,18 +444,18 @@ $ dotnet test
 
 ```bash
 $ dotnet test
-/Users/kasecato/osxcsharp/bin/Debug/netcoreapp3.1/StarWars.dll(.NETCoreApp,Version=v3.1) のテスト実行
-Microsoft (R) Test Execution Command Line Tool Version 16.5.0
+Test run for /Users/kasecato/GitHub/kasecato/osxcsharp/bin/Debug/netcoreapp3.1/StarWars.dll(.NETCoreApp,Version=v3.1)
+Microsoft (R) Test Execution Command Line Tool Version 16.6.0
 Copyright (c) Microsoft Corporation.  All rights reserved.
 
-テスト実行を開始しています。お待ちください...
+Starting test execution, please wait...
 
-合計 1 個のテスト ファイルが指定されたパターンと一致しました。
-                                                                                                                                                                                      
-テストの実行に成功しました。
-テストの合計数: 1
-     成功: 1
-合計時間: 2.4881 秒
+A total of 1 test files matched the specified pattern.
+
+Test Run Successful.
+Total tests: 1
+     Passed: 1
+ Total time: 2.2642 Seconds
 ```
 
 ![EFCCreate.png](https://qiita-image-store.s3.amazonaws.com/0/67778/24be3cf9-3c95-f2a3-2b45-50fce22ca40b.png)
@@ -596,4 +596,7 @@ Overview", http://dotnet.github.io/docs/core-concepts/dnx-migration.html
  1. .NET Blog, "Announcing .NET Core 3.1", https://devblogs.microsoft.com/dotnet/announcing-net-core-3-1/
  1. .NET Blog, "Announcing Entity Framework Core 3.1 and Entity Framework 6.4", https://devblogs.microsoft.com/dotnet/announcing-entity-framework-core-3-1-and-entity-framework-6-4/
  1. .NET Blog, ".NET Core March 2020 Updates – 2.1.17 and 3.1.3", https://devblogs.microsoft.com/dotnet/net-core-march-2020/
+ 1. .NET Blog, ".NET Core May 2020 Updates – 2.1.18 and 3.1.4", https://devblogs.microsoft.com/dotnet/net-core-may-2020/
+ 1. .NET Blog, ".NET Core June 2020 Updates – 2.1.19 and 3.1.5", https://devblogs.microsoft.com/dotnet/net-core-june-2020-updates-2-1-19-and-3-1-5/
+ 1. .NET Blog, ".NET Core July 2020 Updates – 2.1.20 and 3.1.6", https://devblogs.microsoft.com/dotnet/net-core-july-2020/
  
