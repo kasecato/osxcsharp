@@ -1,12 +1,13 @@
 # Mac で C# の Web 開発ができるようになった!
 
-　Visual Studio Code (VS Code) で C# を書いて，O/RM の Entity Framework Core (EFC) から PostgreSQL にアクセスし，データベースのレコードを ASP.NET Core で表示する。すべて macOS 上で可能になったのです。 そうです，Mac で ASP.NET Web アプリ開発がついにできるようになったのです！
+　Visual Studio Code (VS Code) で C# を書いて，O/RM の Entity Framework Core (EFC) から PostgreSQL にアクセスし，データベースのレコードを .NET で表示する。すべて macOS 上で可能になったのです。 そうです，Mac で .NET Web アプリ開発がついにできるようになったのです！
 
 　本稿では Mac 版 VS Code 上で C# を書き，EFC から Postgres に CRUD した結果を自動テストコード xUnit.net で検証します。
 
-　Postgres のインストールと，VS Code のデバッグ，ASP.NET Core の Web アプリを配備できる非同期 I/O の Kestrel Web サーバについては本稿の対象外としています。僕が執筆中の薄い本をお待ち下さい。~~また，ほぼすべての技術が β 版（1.0.0-RC2 2016/5/20時点） 将来の変更で動作しなくなる可能性があります。~~ 2016/6/27 に ASP.NET Core 1.0 RTM （リリース版）となりました。メジャー バージョンの変更がない限り，今後は大幅な仕様変更がないと思われます・・・。（開発者は仕様変更がないホットなフレームワークが存在しないことを知っています）
+　Postgres のインストールと，VS Code のデバッグ，.NET の Web アプリを配備できる非同期 I/O の Kestrel Web サーバについては本稿の対象外としています。僕が執筆中の薄い本をお待ち下さい。~~また，ほぼすべての技術が β 版（1.0.0-RC2 2016/5/20時点） 将来の変更で動作しなくなる可能性があります。~~ 2016/6/27 に ASP.NET Core 1.0 RTM （リリース版）となりました。メジャー バージョンの変更がない限り，今後は大幅な仕様変更がないと思われます・・・。（開発者は仕様変更がないホットなフレームワークが存在しないことを知っています）
 
-![NETCore.png](https://cloud.githubusercontent.com/assets/10364603/15401835/44f5992c-1e2c-11e6-83af-93c1506babeb.jpg)
+<a href="https://devblogs.microsoft.com/aspnet/grpc-performance-improvements-in-net-5/" target="_blank">![grpc-perf-graph.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/67778/ea50d44a-045e-baab-4012-f0f24e82700f.png)</a>
+
 
 # Mac C# の歴史
 
@@ -33,9 +34,9 @@
 
 　Xamarin は 本家 Visual Studio 2015 より標準でインストールできるようになり，Android のデザイナー，デバッガ，エミュレータまでも VS 2015 にはあります。<a href="https://www.idc.com/promo/smartphone-market-share/os" target="_blank">モバイル分野で後塵を拝した Microsoft</a> が本気になっているようです。
 
-<a href="http://www.slideshare.net/chack411/net-core-5-windows-linux-os-x-docker" targe="_blanl">![VS2015.png](https://qiita-image-store.s3.amazonaws.com/0/67778/c472feec-9f9a-a24f-6fe5-8fa1d3d227f6.png)</a>
+<a href="https://docs.microsoft.com/ja-jp/archive/msdn-magazine/2019/july/csharp-net-reunified-microsoft%E2%80%99s-plans-for-net-5" targe="_blanl">![VS2015.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/67778/6e65bbe2-3f8d-ddc4-4eda-c4c1032d1285.png)</a>
 
-## .NET Core (Linux，Mac，Windows)
+## .NET (Linux，Mac，Windows)
 
 　近年の Web 開発は，JS を中心とした開発の生産性や性能の向上に挑戦し続けており，新しい技術が凄まじいスピードで誕生し続けています。特にフロントエンド技術の変遷は<a href="http://postd.cc/longevity-or-lack-thereof-in-javascript-frameworks" target="_blank">「JavaScriptフレームワークの寿命」</a>でも書かれたように，2012年より毎年フレームワークのトレンドが移り変わるという状態です。渦中の Web おじさんとしては，毎日が新しい挑戦でこれが想像以上に楽しいです。
 
@@ -43,9 +44,9 @@
 
 　対話形式でプロジェクトや画面のひな形を生成するスキャフォールディング（足場を組む）の Yeoman （ヨーマン）で MongoDB，Express，Angular，Node のスケルトン コードを生成させる，つまり Web 開発を JS でフルスタックに開発する <a href="http://meanjs.org/" target="_blank">"MEAN スタック"</a> が SPA (Single Page Application) の登場とともに有名になりました。
 
-　このようなモダン Web 開発フローのひとつの選択肢として，バックエンドに C# も気軽に選択できるようにしたのが .NET Core をベースとする ASP.NET Core が登場したひとつの背景だと思います。.NET Core はすべてオープン ソースで，クロス プラットフォームであり，1 つのコードで Linux のサーバでも，Mac でも，Windows でも動作します。素晴らしいです。
+　このようなモダン Web 開発フローのひとつの選択肢として，バックエンドに C# も気軽に選択できるようにしたのが .NET が登場したひとつの背景だと思います。.NET はすべてオープン ソースで，クロス プラットフォームであり，1 つのコードで Linux のサーバでも，Mac でも，Windows でも動作します。素晴らしいです。
 
-![NETCore.png](https://cloud.githubusercontent.com/assets/10364603/15401733/d0bf0bc4-1e2b-11e6-9ca4-e20bbf53bbde.jpg)
+<a href="https://devblogs.microsoft.com/dotnet/introducing-net-5/" target="_blank">![dotnet_schedule.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/67778/7516a2d8-5255-1942-3c84-3655077d299d.png)</a>
 
 # VS Code (Linux, Mac, Windows)
 
@@ -97,15 +98,15 @@
 
 # 環境構築
 
-　Java の開発に JDK，Javascript の開発に node や npm が必要なように，macOS の C# 開発には **.NET Core ツール（dotnet）** が必要となります。
+　Java の開発に JDK，Javascript の開発に node や npm が必要なように，macOS の C# 開発には **.NET ツール（dotnet）** が必要となります。
 
-## .NET Core ツール / dotnet
+## .NET ツール / dotnet
 
-　.NET Core ツール（dotnet）はパッケージ管理や .NET アプリケーションをビルド&実行&テストするためのツールです。
+　.NET ツール（dotnet）はパッケージ管理や .NET アプリケーションをビルド&実行&テストするためのツールです。
 
-### .NET Core Installer macOS
+### .NET Installer macOS
 
-　最後に<a href="https://dotnet.microsoft.com/download" target="_blank">.NET Core</a> macOS 版をダウンロードして，パッケージをインストールします。
+　最後に<a href="https://dotnet.microsoft.com/download" target="_blank">.NET 5</a> macOS 版をダウンロードして，パッケージをインストールします。
 
 　コマンドでパッケージをインストールする場合は以下のとおりです。
 
@@ -149,7 +150,7 @@ StarWars
 
 ## NuGet パッケージ管理 
 
-　<a href="https://docs.microsoft.com/ja-jp/dotnet/framework/get-started/net-core-and-open-source" targe="_blank">*.NET Core は，小規模のアセンブリ パッケージで NuGet を介してリリースされるためモジュール形式となっています。</a>*
+　<a href="https://docs.microsoft.com/ja-jp/dotnet/core/introduction" targe="_blank">*.NET は，小規模のアセンブリ パッケージで NuGet を介してリリースされるためモジュール形式となっています。</a>*
 
 　Hello World 2.0 で必要なパッケージは NuGet で入手します。json を書いてコマンドを実行すると，プロジェクトに必要なパッケージの依存関係を自動で解決してくれます。バージョンアップも 1 コマンドです。VS Code であれば ~~package.json~~ project.json を変更して保存すると自動でパッケージの取得ダイアログを表示してくれるので便利です。
 
@@ -158,7 +159,7 @@ StarWars
 |:-------------------|:------------------|:----------------|
 | <a href="https://docs.microsoft.com/en-us/ef/#pivot=efcore" target="_blank">Entity Framework Core</a> | O/RM | CRUD やトランザクションの制御だけではなくテーブルの自動作成やマイグレーションも可能です | 
 | <a href="http://www.npgsql.org/" target="_blank">Npgsql</a> | EFC Postgres データ プロバイダー | EFC で Postgres への接続を可能にします |
-| <a href="https://xunit.github.io/docs/getting-started/netcore/cmdline" target="_blank">xUnit.net</a> | 自動テストコード | macOS の ASP.NET Core でも実行可能なユニット テスト フレームワークです |
+| <a href="https://xunit.github.io/docs/getting-started/netcore/cmdline" target="_blank">xUnit.net</a> | 自動テストコード | macOS の .NET でも実行可能なユニット テスト フレームワークです |
 
 ### project.json
 
@@ -171,28 +172,27 @@ StarWars
     <AssemblyName>StarWars</AssemblyName>
     <PackageId>StarWars</PackageId>
     <VersionPrefix>1.0.0</VersionPrefix>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <OutputType>Library</OutputType>
     <DebugType>portable</DebugType>
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
     <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
-    <RuntimeFrameworkVersion>3.1.6</RuntimeFrameworkVersion>
+    <RuntimeFrameworkVersion>5.0.0</RuntimeFrameworkVersion>
   </PropertyGroup>
 
   <ItemGroup>
     <!-- xUnit.net -->
     <!-- https://xunit.github.io/docs/getting-started/netcore/cmdline -->
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.6.1" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.0" />
     <PackageReference Include="xunit" Version="2.4.1" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.2" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3" />
 
     <!-- Npgsql Entity Framework Core -->
     <!-- http://www.npgsql.org/efcore/index.html -->
-    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="3.1.4" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.0-rc2" />
 
-    <!-- The dotnet ef commands are included in the .NET Core SDK, but to enable the commands you have to install the Microsoft.EntityFrameworkCore.Design package. -->
-    <!-- https://docs.microsoft.com/en-us/ef/core/miscellaneous/cli/dotnet#ef-core-3x -->
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.6" />
+    <!-- https://docs.microsoft.com/en-us/ef/core/cli/dotnet -->
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.0" />
   </ItemGroup>
 
 </Project>
@@ -269,7 +269,7 @@ services:
 ```
 
 ```yaml:postgres/Dockerfile
-FROM postgres:11
+FROM postgres:13
 ```
 
 　次の Docker コマンドで Postgres を起動します。
@@ -280,16 +280,16 @@ $ docker-compose up
 
 ### EFC インストール
 
-　EF Core 3.0 より dotnet ef コマンドが .NET Core SDK に含まれなくなりました。パッケージをインストールするコマンドは以下のとおりです。
+　EF Core 3.0 より dotnet ef コマンドが .NET SDK に含まれなくなりました。パッケージをインストールするコマンドは以下のとおりです。
 
 ```bash
-$ dotnet tool install --global dotnet-ef --version 3.1.6
+$ dotnet tool install --global dotnet-ef
 ```
 
 　もし古いバージョンの 3.0.0 がインストールされている場合は，`update` コマンドを使用します。
 
 ```bash
-$ dotnet tool update --global dotnet-ef --version 3.1.6
+$ dotnet tool update --global dotnet-ef
 ```
 
 ### EFC マイグレーション
@@ -444,18 +444,17 @@ $ dotnet test
 
 ```bash
 $ dotnet test
-Test run for /Users/kasecato/GitHub/kasecato/osxcsharp/bin/Debug/netcoreapp3.1/StarWars.dll(.NETCoreApp,Version=v3.1)
-Microsoft (R) Test Execution Command Line Tool Version 16.6.0
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  project -> /Users/kasecato/GitHub/kasecato/osxcsharp/bin/Debug/net5.0/StarWars.dll
+Test run for /Users/kasecato/GitHub/kasecato/osxcsharp/bin/Debug/net5.0/StarWars.dll (.NETCoreApp,Version=v5.0)
+Microsoft (R) Test Execution Command Line Tool Version 16.8.0
 Copyright (c) Microsoft Corporation.  All rights reserved.
 
 Starting test execution, please wait...
-
 A total of 1 test files matched the specified pattern.
 
-Test Run Successful.
-Total tests: 1
-     Passed: 1
- Total time: 2.2642 Seconds
+Passed!  - Failed:     0, Passed:     1, Skipped:     0, Total:     1, Duration: 1 s - /Users/kasecato/GitHub/kasecato/osxcsharp/bin/Debug/net5.0/StarWars.dll (net5.0)
 ```
 
 ![EFCCreate.png](https://qiita-image-store.s3.amazonaws.com/0/67778/24be3cf9-3c95-f2a3-2b45-50fce22ca40b.png)
@@ -479,7 +478,7 @@ $ docker exec -it postgres-starwars bash
 * EFC で Postgres がマイグレーションできた
 * EFC で Postgres に C R~~U~~D できた
 * xUnit.net で 自動テストコードが書けた
-* ~~Kestrel Web サーバ上に ASP.NET Core を配備して Star Wars ができた~~
+* ~~Kestrel Web サーバ上に .NET を配備して Star Wars ができた~~
 
 
 # 付録
@@ -564,6 +563,10 @@ $ dotnet migrate
 
 　.NET Core 3.1 と Entity Framework Core 3.1 がリリースされました。
 
+## Announcing .NET 5.0, Announcing the Release of EF Core 5.0 (2020/11/10)
+
+　.NET 5.0 と Entity Framework Core 5.0 がリリースされました。
+
 # 参考ノート
 
  1. Entity Framework Documentation, "Getting Started on OS X", https://docs.efproject.net/en/latest/platforms/coreclr/getting-started-osx.html
@@ -599,4 +602,5 @@ Overview", http://dotnet.github.io/docs/core-concepts/dnx-migration.html
  1. .NET Blog, ".NET Core May 2020 Updates – 2.1.18 and 3.1.4", https://devblogs.microsoft.com/dotnet/net-core-may-2020/
  1. .NET Blog, ".NET Core June 2020 Updates – 2.1.19 and 3.1.5", https://devblogs.microsoft.com/dotnet/net-core-june-2020-updates-2-1-19-and-3-1-5/
  1. .NET Blog, ".NET Core July 2020 Updates – 2.1.20 and 3.1.6", https://devblogs.microsoft.com/dotnet/net-core-july-2020/
- 
+ 1. .NET Blog, "Announcing .NET 5.0", https://devblogs.microsoft.com/dotnet/announcing-net-5-0/
+ 1. .NET Blog, "Announcing the Release of EF Core 5.0", https://devblogs.microsoft.com/dotnet/announcing-the-release-of-ef-core-5-0/
