@@ -189,7 +189,7 @@ StarWars
 
     <!-- Npgsql Entity Framework Core -->
     <!-- http://www.npgsql.org/efcore/index.html -->
-    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.0-rc2" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.0" />
 
     <!-- https://docs.microsoft.com/en-us/ef/core/cli/dotnet -->
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.0" />
