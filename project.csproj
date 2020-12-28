@@ -9,23 +9,22 @@
     <DebugType>portable</DebugType>
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
     <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
-    <RuntimeFrameworkVersion>5.0.0</RuntimeFrameworkVersion>
+    <RuntimeFrameworkVersion>5.0.1</RuntimeFrameworkVersion>
   </PropertyGroup>
 
   <ItemGroup>
     <!-- xUnit.net -->
-    <!-- https://xunit.github.io/docs/getting-started/netcore/cmdline -->
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.0" />
+    <!-- https://xunit.net/docs/getting-started/netcore/cmdline -->
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.3" />
     <PackageReference Include="xunit" Version="2.4.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3" />
 
     <!-- Npgsql Entity Framework Core -->
     <!-- http://www.npgsql.org/efcore/index.html -->
-    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.0" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.1" />
 
-    <!-- The dotnet ef commands are included in the .NET Core SDK, but to enable the commands you have to install the Microsoft.EntityFrameworkCore.Design package. -->
     <!-- https://docs.microsoft.com/en-us/ef/core/cli/dotnet -->
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.1" />
   </ItemGroup>
 
 </Project>

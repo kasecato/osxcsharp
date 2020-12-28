@@ -159,7 +159,7 @@ StarWars
 |:-------------------|:------------------|:----------------|
 | <a href="https://docs.microsoft.com/en-us/ef/#pivot=efcore" target="_blank">Entity Framework Core</a> | O/RM | CRUD やトランザクションの制御だけではなくテーブルの自動作成やマイグレーションも可能です | 
 | <a href="http://www.npgsql.org/" target="_blank">Npgsql</a> | EFC Postgres データ プロバイダー | EFC で Postgres への接続を可能にします |
-| <a href="https://xunit.github.io/docs/getting-started/netcore/cmdline" target="_blank">xUnit.net</a> | 自動テストコード | macOS の .NET でも実行可能なユニット テスト フレームワークです |
+| <a href="https://xunit.net/docs/getting-started/netcore/cmdline" target="_blank">xUnit.net</a> | 自動テストコード | macOS の .NET でも実行可能なユニット テスト フレームワークです |
 
 ### project.json
 
@@ -177,22 +177,22 @@ StarWars
     <DebugType>portable</DebugType>
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
     <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
-    <RuntimeFrameworkVersion>5.0.0</RuntimeFrameworkVersion>
+    <RuntimeFrameworkVersion>5.0.1</RuntimeFrameworkVersion>
   </PropertyGroup>
 
   <ItemGroup>
     <!-- xUnit.net -->
-    <!-- https://xunit.github.io/docs/getting-started/netcore/cmdline -->
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.0" />
+    <!-- https://xunit.net/docs/getting-started/netcore/cmdline -->
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.3" />
     <PackageReference Include="xunit" Version="2.4.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3" />
 
     <!-- Npgsql Entity Framework Core -->
     <!-- http://www.npgsql.org/efcore/index.html -->
-    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.0" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.1" />
 
     <!-- https://docs.microsoft.com/en-us/ef/core/cli/dotnet -->
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.1" />
   </ItemGroup>
 
 </Project>
@@ -604,3 +604,4 @@ Overview", http://dotnet.github.io/docs/core-concepts/dnx-migration.html
  1. .NET Blog, ".NET Core July 2020 Updates – 2.1.20 and 3.1.6", https://devblogs.microsoft.com/dotnet/net-core-july-2020/
  1. .NET Blog, "Announcing .NET 5.0", https://devblogs.microsoft.com/dotnet/announcing-net-5-0/
  1. .NET Blog, "Announcing the Release of EF Core 5.0", https://devblogs.microsoft.com/dotnet/announcing-the-release-of-ef-core-5-0/
+ 1. .NET Blog, ".NET December 2020 Updates – 5.0.1", https://devblogs.microsoft.com/dotnet/net-december-2020/
