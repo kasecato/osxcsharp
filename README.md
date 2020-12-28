@@ -265,7 +265,7 @@ services:
       POSTGRES_PASSWORD: r2d2
       POSTGRES_DB: starwars
     ports:
-      - 5432:5432
+      - 15432:5432
 ```
 
 ```yaml:postgres/Dockerfile
