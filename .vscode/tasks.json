@@ -1,33 +1,40 @@
 {
-    "version": "0.1.0",
+    "version": "2.0.0",
     "command": "dotnet",
-    "isShellCommand": true,
     "args": [],
     "tasks": [
         {
-            "taskName": "build",
+            "label": "build",
+            "type": "shell",
+            "command": "dotnet",
             "args": [
-                ""
+                "build",
             ],
-            "isBuildCommand": true,
-            "problemMatcher": "$msCompile"
+            "problemMatcher": "$msCompile",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
         },
         {
-            "taskName": "run",
+            "label": "run",
+            "type": "shell",
+            "command": "dotnet",
             "args": [
-                ""
+                "run",
             ],
-            "isBuildCommand": true,
-            "problemMatcher": "$msCompile"
+            "problemMatcher": "$msCompile",
+            "group": "build",
         },
         {
-            "taskName": "test",
+            "label": "test",
+            "type": "shell",
+            "command": "dotnet",
             "args": [
-                ""
+                "test",
             ],
-            "isBuildCommand": true,
-            "problemMatcher": "$msCompile"
+            "problemMatcher": "$msCompile",
+            "group": "test"
         }
-
     ]
 }

@@ -18,7 +18,7 @@ namespace StarWars.Test
           DirectorId = 4,
           Episode = 7,
           Name = "J. J. Abrams",
-          Born = DateTime.Parse("June 27, 1966")
+          Born = DateTime.Parse("June 27, 1966").ToUniversalTime(),
         };
 
         // act
