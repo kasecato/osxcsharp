@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using StarWars.Model;
 
-namespace StarWars.Domain
+namespace StarWars.Data
 {
     public class StarWarsContext : DbContext
     {

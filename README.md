@@ -129,7 +129,7 @@ StarWars
 ├── project.csproj
 ├── docker-compose.yml
 ├── src
-│   ├── Domain
+│   ├── Data
 │   │   └── StarWarsContext.cs
 │   ├── Model
 │   │   └── Director.cs
@@ -189,7 +189,7 @@ StarWars
 
     <!-- Npgsql Entity Framework Core -->
     <!-- http://www.npgsql.org/efcore/index.html -->
-    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.0-rc.2" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.0" />
 
     <!-- https://docs.microsoft.com/en-us/ef/core/cli/dotnet -->
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.0" />
@@ -228,7 +228,7 @@ namespace StarWars.Model
 
 　モデルにアトリビュート (Java のアノテーションに相当) の記述が一切ありません。これは EF が設定を最小限にする思想 CoC (Convention over Configuration: 設定より規約) であるためです。規約に沿ったプログラムさえ書けば，面倒な設定はフレームワークがよしなに設定してくれます。本モデルでは テーブル名 + Id の DirectorId が自動的に主キーとして自動設定されます。
 
-### Domain/StarWarsContext.cs
+### Data/StarWarsContext.cs
 
 　EFC から Postgres にアクセスするための接続情報 (DbContext) は以下の通りです。
 
@@ -236,7 +236,7 @@ namespace StarWars.Model
 using Microsoft.EntityFrameworkCore;
 using StarWars.Model;
 
-namespace StarWars.Domain
+namespace StarWars.Data
 {
     public class StarWarsContext : DbContext
     {
@@ -385,7 +385,7 @@ Indexes:
 
 ```csharp:StarWarsCrudTest.cs
 using System;
-using StarWars.Domain;
+using StarWars.Data;
 using StarWars.Model;
 using Xunit;
 
@@ -456,8 +456,6 @@ A total of 1 test files matched the specified pattern.
 
 Passed!  - Failed:     0, Passed:     1, Skipped:     0, Total:     1, Duration: 1 s - /Users/kasecato/GitHub/kasecato/osxcsharp/bin/Debug/net5.0/StarWars.dll (net5.0)
 ```
-
-![EFCCreate.png](https://qiita-image-store.s3.amazonaws.com/0/67778/24be3cf9-3c95-f2a3-2b45-50fce22ca40b.png)
 
 ```bash
 $ docker exec -it postgres-starwars bash

@@ -21,7 +21,7 @@
 
     <!-- Npgsql Entity Framework Core -->
     <!-- http://www.npgsql.org/efcore/index.html -->
-    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.0-rc.2" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.0" />
 
     <!-- https://docs.microsoft.com/en-us/ef/core/cli/dotnet -->
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.0" />

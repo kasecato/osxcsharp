@@ -1,5 +1,5 @@
 using System;
-using StarWars.Domain;
+using StarWars.Data;
 using StarWars.Model;
 using Xunit;
 
