@@ -106,7 +106,7 @@
 
 ### .NET Installer macOS
 
-　最後に<a href="https://dotnet.microsoft.com/download" target="_blank">.NET 5</a> macOS 版をダウンロードして，パッケージをインストールします。
+　最後に<a href="https://dotnet.microsoft.com/download" target="_blank">.NET 8</a> macOS 版をダウンロードして，パッケージをインストールします。
 
 　コマンドでパッケージをインストールする場合は以下のとおりです。
 
@@ -172,27 +172,27 @@ StarWars
     <AssemblyName>StarWars</AssemblyName>
     <PackageId>StarWars</PackageId>
     <VersionPrefix>1.0.0</VersionPrefix>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <OutputType>Library</OutputType>
     <DebugType>portable</DebugType>
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
     <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
-    <RuntimeFrameworkVersion>7.0.0</RuntimeFrameworkVersion>
+    <RuntimeFrameworkVersion>8.0.0</RuntimeFrameworkVersion>
   </PropertyGroup>
 
   <ItemGroup>
     <!-- xUnit.net -->
     <!-- https://xunit.net/docs/getting-started/netcore/cmdline -->
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.4.0" />
-    <PackageReference Include="xunit" Version="2.4.2" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.5" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.9.0" />
+    <PackageReference Include="xunit" Version="2.7.0" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.5.7" />
 
     <!-- Npgsql Entity Framework Core -->
     <!-- http://www.npgsql.org/efcore/index.html -->
-    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.0" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.2" />
 
     <!-- https://docs.microsoft.com/en-us/ef/core/cli/dotnet -->
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.2" />
   </ItemGroup>
 
 </Project>
@@ -269,7 +269,7 @@ services:
 ```
 
 ```yaml:postgres/Dockerfile
-FROM postgres:15
+FROM postgres:16
 ```
 
 　次の Docker コマンドで Postgres を起動します。
@@ -447,7 +447,7 @@ $ dotnet test
 Starting test execution, please wait...
 A total of 1 test files matched the specified pattern.
 
-Passed!  - Failed:     0, Passed:     1, Skipped:     0, Total:     1, Duration: < 1 ms - StarWars.dll (net7.0)
+Passed!  - Failed:     0, Passed:     1, Skipped:     0, Total:     1, Duration: < 1 ms - StarWars.dll (net8.0)
 ```
 
 ```bash
@@ -566,6 +566,10 @@ $ dotnet migrate
 
 　.NET 7.0 と Entity Framework Core 7.0 がリリースされました。
 
+## Announcing .NET 8.0, Announcing the Release of EF Core 8.0 (2023/11/14)
+
+　.NET 8.0 と Entity Framework Core 8.0 がリリースされました。
+
 # 参考ノート
 
  1. Entity Framework Documentation, "Getting Started on OS X", https://docs.efproject.net/en/latest/platforms/coreclr/getting-started-osx.html
@@ -610,3 +614,6 @@ Overview", http://dotnet.github.io/docs/core-concepts/dnx-migration.html
  1. .NET Blog, ".NET 7 is Available Today", https://devblogs.microsoft.com/dotnet/announcing-dotnet-7/
  1. .NET Blog, "Announcing ASP.NET Core in .NET 7", https://devblogs.microsoft.com/dotnet/announcing-asp-net-core-in-dotnet-7/
  1. Microsoft Learn, "Migrate from ASP.NET Core 6.0 to 7.0", https://learn.microsoft.com/en-us/aspnet/core/migration/60-70?view=aspnetcore-7.0&tabs=visual-studio-code
+ 1. .NET Blog, "Announcing ASP.NET Core in .NET 8", https://devblogs.microsoft.com/dotnet/announcing-asp-net-core-in-dotnet-8/
+ 1. Microsoft Learn, "Migrate from ASP.NET Core in .NET 7 to .NET 8", https://learn.microsoft.com/en-us/aspnet/core/migration/70-80?view=aspnetcore-7.0&tabs=visual-studio-code
+ 
